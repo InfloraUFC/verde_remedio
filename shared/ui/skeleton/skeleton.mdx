@@ -1,0 +1,33 @@
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks"
+import * as SkeletonStories from "./skeleton.stories"
+import { Skeleton } from "./skeleton"
+
+<Meta of={ SkeletonStories } />
+
+# Skeleton
+
+Descrição do componente.
+
+## Como funciona
+
+Explique como o componente funciona.
+
+## Estrutura básica
+
+```tsx
+import { Skeleton } from "@/components/ui/skeleton"
+
+export function Example() {
+  return (
+    <Skeleton>
+      Example
+    </Skeleton>
+  )
+}
+```
+
+## Controle interativo
+<Canvas> <Controls of={SkeletonStories.Default} /> </Canvas>
+
+## Props principais
+<ul> <li><strong>className</strong> – classes adicionais.</li> </ul>

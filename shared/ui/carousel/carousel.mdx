@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as CarouselStories from "./carousel.stories"
+
+<Meta of={CarouselStories} />
+
+# Carousel
+
+O **Carousel** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { Carousel } from "@/components/ui/carousel"
+
+export function Example() {
+  return (
+    <Carousel>
+      Conteúdo
+    </Carousel>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={CarouselStories.Default} />
+</Canvas>

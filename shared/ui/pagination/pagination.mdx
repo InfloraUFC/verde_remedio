@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as PaginationStories from "./pagination.stories"
+
+<Meta of={PaginationStories} />
+
+# Pagination
+
+O **Pagination** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { Pagination } from "@/components/ui/pagination"
+
+export function Example() {
+  return (
+    <Pagination>
+      Conteúdo
+    </Pagination>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={PaginationStories.Default} />
+</Canvas>

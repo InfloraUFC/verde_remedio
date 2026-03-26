@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as SheetStories from "./sheet.stories"
+
+<Meta of={SheetStories} />
+
+# Sheet
+
+O **Sheet** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { Sheet } from "@/components/ui/sheet"
+
+export function Example() {
+  return (
+    <Sheet>
+      Conteúdo
+    </Sheet>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={SheetStories.Default} />
+</Canvas>

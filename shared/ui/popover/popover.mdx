@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as PopoverStories from "./popover.stories"
+
+<Meta of={PopoverStories} />
+
+# Popover
+
+O **Popover** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { Popover } from "@/components/ui/popover"
+
+export function Example() {
+  return (
+    <Popover>
+      Conteúdo
+    </Popover>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={PopoverStories.Default} />
+</Canvas>

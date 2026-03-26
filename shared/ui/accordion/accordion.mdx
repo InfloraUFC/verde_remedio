@@ -1,0 +1,97 @@
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks"
+import * as AccordionStories from "./accordion.stories"
+
+<Meta of={AccordionStories} />
+
+# Accordion
+
+O **Accordion** é um componente utilizado para **organizar conteúdos em seções expansíveis**.
+
+Cada item do Accordion pode ser aberto ou fechado pelo usuário, permitindo que grandes quantidades de conteúdo sejam exibidas de forma compacta.
+
+Ele é construído utilizando **Radix UI**, garantindo acessibilidade, controle de estado e navegação por teclado.
+
+## Como funciona
+
+O componente é composto por quatro partes principais:
+
+- **Accordion** – container principal que controla o comportamento.
+- **AccordionItem** – item individual do accordion.
+- **AccordionTrigger** – botão que abre ou fecha o item.
+- **AccordionContent** – área onde o conteúdo é exibido.
+
+O Accordion pode operar em dois modos:
+
+- **single** – apenas um item aberto por vez.
+- **multiple** – vários itens podem ficar abertos ao mesmo tempo.
+
+Também é possível permitir que todos os itens sejam fechados utilizando `collapsible`.
+
+## Estrutura básica
+
+```tsx
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent
+} from "@/components/ui/accordion"
+
+export function Example() {
+  return (
+    <Accordion type="single" collapsible>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>
+          Item 1
+        </AccordionTrigger>
+
+        <AccordionContent>
+          Conteúdo do item 1
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
+}
+```
+
+## Exemplo interativo Simples
+<Canvas of={AccordionStories.AccordionSimple} />
+
+
+## Exemplo interativo Múltiplo
+<Canvas of={AccordionStories.AccordionMultiple} />
+
+## Props principais
+<ul>
+  <li>
+    <strong>type</strong> – define o comportamento de abertura do accordion,
+    aceita: <code>single</code> ou <code>multiple</code>.
+  </li>
+
+  <li>
+    <strong>collapsible</strong> – quando <code>true</code> permite que o item
+    aberto seja fechado novamente ao clicar no trigger. Usado principalmente
+    com <code>type="single"</code>.
+  </li>
+
+  <li>
+    <strong>defaultValue</strong> – define qual item inicia aberto no
+    accordion. Pode ser uma <code>string</code> ou um
+    <code>array de strings</code> dependendo do tipo utilizado.
+  </li>
+
+  <li>
+    <strong>value</strong> – controla programaticamente qual item está aberto,
+    permitindo controle externo do estado do accordion.
+  </li>
+
+  <li>
+    <strong>className</strong> – permite adicionar classes extras para
+    customização do container do accordion.
+  </li>
+
+  <li>
+    Todos os props nativos do <code>AccordionPrimitive.Root</code> do
+    <code>Radix UI</code> também são suportados.
+  </li>
+</ul>

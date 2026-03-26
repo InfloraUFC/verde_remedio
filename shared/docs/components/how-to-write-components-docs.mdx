@@ -1,0 +1,182 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Documentation/Components/How to write component docs" />
+
+# Guia de documentação de componentes
+
+Este guia explica como criar arquivos **`.mdx` de documentação** para os componentes do design system.
+
+O objetivo é manter **consistência entre todos os componentes**, facilitando leitura, manutenção e uso dentro do Storybook.
+
+Todos os componentes devem seguir a mesma estrutura utilizada no **Button**.
+
+---
+
+# Estrutura padrão da documentação
+
+Toda documentação deve seguir esta ordem:
+
+1. Importações
+2. Meta do Storybook
+3. Título do componente
+4. Descrição do componente
+5. Seção **Como funciona**
+6. Seção **Estrutura básica**
+7. **Controle interativo**
+8. **Props principais**
+
+---
+
+## 1. Importações
+
+Todo arquivo MDX deve começar importando os blocos de documentação e as stories do componente.
+
+```tsx
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as React from "react"
+import * as ComponentStories from "./component.stories"
+import { Component } from "./component"
+```
+
+## 2. Meta do Storybook
+
+O Meta conecta a documentação com as stories do componente.
+
+```tsx
+  <Meta of={ComponentStories} />
+```
+
+Isso permite que o Storybook:
+- reconheça as stories
+- mostre os controls
+- conecte exemplos interativos
+
+## 3. Título do componente
+
+O título deve ser o nome do componente.
+
+```markdown
+  # Button
+```
+
+## 4. Descrição do componente
+
+Explique o que o componente faz e quando deve ser utilizado.
+
+Exemplo:
+
+```markdown
+  O **Button** é um componente de interface utilizado dentro do design system
+  para criar botões consistentes, com estilos e comportamento reutilizáveis.
+```
+
+Evite descrições muito longas. O objetivo é explicar a função do componente.
+
+## 5. Como funciona
+
+Nesta seção você explica:
+- comportamento do componente
+- variações disponíveis
+- conceitos importantes
+
+Exemplo:
+
+```markdown
+
+## Como funciona
+  O Button encapsula estilos através do `cva` e permite:
+
+  - Variantes de estilo
+  - Diferentes tamanhos
+  - Uso via `asChild` para composição com outros elementos
+```
+
+## 6. Estrutura básica
+
+Mostra como utilizar o componente no código.
+Este exemplo não deve renderizar o componente, apenas mostrar o código.
+Use sempre um bloco de código tsx.
+
+```tsx
+  import { Button } from "@/components/ui/button"
+
+  export function Example() {
+    return (
+      <Button variant="default" size="default">
+        Clique aqui
+      </Button>
+    )
+  }
+```
+
+## 7. Controle interativo
+
+Adicione controles interativos usando as stories do componente.
+
+```markdown
+  ## Controle interativo
+
+  <Canvas>
+    <Controls of={ComponentStories.Default} />
+  </Canvas>
+```
+
+Isso permite:
+- alterar props
+- testar variações
+- visualizar comportamento em tempo real
+
+## 8. Props principais
+
+Liste apenas as props relevantes para uso do componente.
+Use sempre lista HTML (ul) em vez de tabela Markdown.
+
+```HTML
+  <ul>
+    <li>
+      <strong>variant</strong> – define a aparência do componente.
+    </li>
+
+    <li>
+      <strong>size</strong> – define o tamanho do componente.
+    </li>
+
+    <li>
+      <strong>className</strong> – permite adicionar classes extras.
+    </li>
+
+    <li>
+      Todos os props nativos do elemento também são suportados.
+    </li>
+  </ul>
+```
+
+# Boas práticas
+
+## 1. Não usar tabelas Markdown
+
+Utilize sempre listas HTML para documentar props.
+
+## 2. Evitar renderizar exemplos fora do Canvas
+
+Se quiser mostrar apenas código, use bloco tsx.
+
+```tsx
+  <Button>Exemplo</Button>
+```
+
+## 3. Documentar apenas o necessário
+
+Não é necessário documentar todas as props internas.
+
+Documente apenas:
+- props usadas no design system
+- props que alteram comportamento visual
+
+# Objetivo desse padrão
+
+Este padrão garante:
+- consistência na documentação
+- leitura rápida
+- manutenção mais simples
+- escalabilidade do design system

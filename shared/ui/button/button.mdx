@@ -1,0 +1,51 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks";
+import * as React from "react";
+import * as ButtonStories from "./button.stories";
+import { Button } from "./button";
+
+<Meta of={ButtonStories} />
+
+# Button
+
+O **Button** é um componente de interface utilizado dentro do design system para criar botões consistentes, com estilos e comportamento reutilizáveis.
+
+## Como funciona
+
+O Button encapsula estilos através do `cva` e permite:
+
+- Variantes de estilo (`default`, `outline`, `secondary`, `ghost`, `destructive`, `link`)
+- Diferentes tamanhos (`default`, `xs`, `sm`, `lg`, `icon`, `icon-xs`, `icon-sm`, `icon-lg`)
+- Uso como botão padrão ou via `asChild` para usar outro componente como base (ex.: `a` ou `div`)
+
+## Estrutura básica
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function Example() {
+  return (
+    <Button
+      variant='default'
+      size='default'
+    >
+      Clique aqui
+    </Button>
+  );
+}
+```
+
+## Controle interativo
+
+<Canvas>
+  <Controls of={ButtonStories.Default} />
+</Canvas>
+
+## Props principais
+
+<ul>
+  <li><strong>variant</strong> – define a aparência do botão, aceita: <code>default</code>, <code>outline</code>, <code>secondary</code>, <code>ghost</code>, <code>destructive</code>, <code>link</code>.</li>
+  <li><strong>size</strong> – define o tamanho do botão, aceita: <code>default</code>, <code>xs</code>, <code>sm</code>, <code>lg</code>, <code>icon</code>, <code>icon-xs</code>, <code>icon-sm</code>, <code>icon-lg</code>.</li>
+  <li><strong>asChild</strong> – se verdadeiro, usa o botão como um wrapper (`Slot`) permitindo outro componente como base.</li>
+  <li><strong>className</strong> – classes adicionais para customizar o estilo.</li>
+  <li>Todos os props nativos de <code>&lt;button&gt;</code> também são aceitos.</li>
+</ul>

@@ -1,0 +1,8 @@
+BRANCH="$(git symbolic-ref --short HEAD)"
+
+if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "development" ]; then
+  echo "Rodando testes antes do push ($BRANCH)..."
+  pnpm run test
+else
+  echo "Push sem testes (branch $BRANCH)"
+fi

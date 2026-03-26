@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as ContextMenuStories from "./context-menu.stories"
+
+<Meta of={ContextMenuStories} />
+
+# ContextMenu
+
+O **ContextMenu** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { ContextMenu } from "@/components/ui/context-menu"
+
+export function Example() {
+  return (
+    <ContextMenu>
+      Conteúdo
+    </ContextMenu>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={ContextMenuStories.Default} />
+</Canvas>

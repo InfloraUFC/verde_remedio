@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as ScrollAreaStories from "./scroll-area.stories"
+
+<Meta of={ScrollAreaStories} />
+
+# ScrollArea
+
+O **ScrollArea** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { ScrollArea } from "@/components/ui/scroll-area"
+
+export function Example() {
+  return (
+    <ScrollArea>
+      Conteúdo
+    </ScrollArea>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={ScrollAreaStories.Default} />
+</Canvas>

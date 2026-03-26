@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as DrawerStories from "./drawer.stories"
+
+<Meta of={DrawerStories} />
+
+# Drawer
+
+O **Drawer** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { Drawer } from "@/components/ui/drawer"
+
+export function Example() {
+  return (
+    <Drawer>
+      Conteúdo
+    </Drawer>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={DrawerStories.Default} />
+</Canvas>

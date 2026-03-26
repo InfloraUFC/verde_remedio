@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as HoverCardStories from "./hover-card.stories"
+
+<Meta of={HoverCardStories} />
+
+# HoverCard
+
+O **HoverCard** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { HoverCard } from "@/components/ui/hover-card"
+
+export function Example() {
+  return (
+    <HoverCard>
+      Conteúdo
+    </HoverCard>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={HoverCardStories.Default} />
+</Canvas>

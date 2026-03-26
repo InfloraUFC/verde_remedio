@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as BreadcrumbStories from "./breadcrumb.stories"
+
+<Meta of={BreadcrumbStories} />
+
+# Breadcrumb
+
+O **Breadcrumb** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { Breadcrumb } from "@/components/ui/breadcrumb"
+
+export function Example() {
+  return (
+    <Breadcrumb>
+      Conteúdo
+    </Breadcrumb>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={BreadcrumbStories.Default} />
+</Canvas>

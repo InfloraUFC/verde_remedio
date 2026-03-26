@@ -1,0 +1,97 @@
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks"
+import * as AvatarStories from "./avatar.stories"
+
+<Meta of={AvatarStories} />
+
+# Avatar
+
+O **Avatar** é um componente utilizado para representar visualmente um usuário através de uma **imagem de perfil**, **iniciais** ou **indicadores visuais**.
+
+Ele é construído utilizando **Radix UI**, garantindo acessibilidade e controle de carregamento da imagem.
+
+O componente também oferece suporte para:
+
+- fallback com iniciais
+- badges de status
+- agrupamento de múltiplos avatares
+
+---
+
+## Como funciona
+
+O Avatar é composto por múltiplas partes que podem ser utilizadas juntas ou separadamente:
+
+- **Avatar** – container principal do componente.
+- **AvatarImage** – imagem do usuário.
+- **AvatarFallback** – conteúdo exibido quando a imagem não carrega.
+- **AvatarBadge** – pequeno indicador posicionado no canto do avatar.
+- **AvatarGroup** – container para agrupar múltiplos avatares.
+- **AvatarGroupCount** – contador utilizado quando há mais usuários que o espaço disponível.
+
+O componente também suporta diferentes tamanhos utilizando a prop `size`.
+
+Valores disponíveis:
+
+- `sm`
+- `default`
+- `lg`
+
+---
+
+## Estrutura básica
+
+```tsx
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback
+} from "@/components/ui/avatar"
+
+export function Example() {
+  return (
+    <Avatar>
+      <AvatarImage src="/user.png" alt="User" />
+      <AvatarFallback>JD</AvatarFallback>
+    </Avatar>
+  )
+}
+```
+
+---
+
+## Controle interativo
+
+<Canvas> 
+  <Controls of={AvatarStories.Default} />
+</Canvas>
+
+---
+
+## Exemplo Avatar com fallback
+<Canvas of={AvatarStories.WithFallback} />
+
+---
+
+## Exemplo Avatar com badge
+<Canvas of={AvatarStories.WithBadge} />
+
+---
+
+## Tamanhos
+<Canvas of={AvatarStories.Sizes} />
+
+---
+
+## Grupo de avatares
+<Canvas of={AvatarStories.Group} />
+
+---
+
+## Props principais
+<ul> 
+  <li> <strong>size</strong> – define o tamanho do avatar. Aceita <code>sm</code>, <code>default</code> ou <code>lg</code>. </li> 
+  <li> <strong>className</strong> – permite adicionar classes extras para customização do avatar. </li> 
+  <li> <strong>src</strong> – define a URL da imagem exibida no <code>AvatarImage</code>. </li> 
+  <li> <strong>alt</strong> – texto alternativo da imagem para acessibilidade. </li> 
+  <li> Todos os props nativos do <code>Radix AvatarPrimitive.Root</code>, <code>Image</code> e <code>Fallback</code> também são suportados. </li> 
+</ul>

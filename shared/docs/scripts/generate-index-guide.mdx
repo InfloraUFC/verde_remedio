@@ -1,0 +1,128 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Documentation/Scripts/Generate index script" />
+
+# Gerador de Index (`generate:index`)
+
+Este script gera automaticamente um arquivo `index.ts` que exporta todos os módulos de uma pasta.
+Ele é útil para **design systems**, **bibliotecas de componentes** ou qualquer estrutura onde cada componente possui seu próprio `index.ts`.
+
+---
+
+## Estrutura esperada
+
+Considere a seguinte estrutura de pastas:
+
+```
+ui/
+ ├─ button/
+ │   └─ index.ts
+ ├─ breadcrumb/
+ │   └─ index.ts
+ ├─ badge/
+ │   └─ index.ts
+```
+
+Cada componente possui seu próprio `index.ts`.
+
+---
+
+## Resultado gerado
+
+Ao executar o script na pasta `ui`, será criado:
+
+```
+ui/index.ts
+```
+
+Conteúdo:
+
+```ts
+export * from './button'
+export * from './breadcrumb'
+export * from './badge'
+```
+
+Isso permite importar componentes assim:
+
+```ts
+import { Button, Breadcrumb } from '@/ui'
+```
+
+---
+
+## Como usar
+
+Execute o script passando o caminho da pasta:
+
+```bash
+node scripts/generate-index.js src/components/ui
+```
+
+---
+
+## Usando com NPM Script
+
+No `package.json`:
+
+```json
+{
+  "scripts": {
+    "generate:index": "node scripts/generate-index.ts"
+  }
+}
+```
+
+Agora você pode executar:
+
+```bash
+npm run generate:index src/components/ui
+```
+
+---
+
+## Boas práticas
+
+- Cada pasta deve possuir um `index.ts`
+- O script ignora pastas sem `index.ts`
+- Ideal para **design systems** e **bibliotecas de componentes**
+
+---
+
+## Exemplo real
+
+```
+src/components/ui/
+ ├─ button/
+ ├─ input/
+ ├─ modal/
+```
+
+Após rodar o script:
+
+```ts
+export * from './button'
+export * from './input'
+export * from './modal'
+```
+
+---
+
+## Benefícios
+
+* reduz imports longos
+* mantém exports centralizados
+* evita manutenção manual
+* facilita organização de componentes
+
+---
+
+## Próximos passos
+
+Possíveis melhorias:
+
+* varredura **recursiva**
+* suporte a `.tsx`
+* ordenação automática dos exports
+* ignorar arquivos específicos
+* rodar automaticamente no **build**

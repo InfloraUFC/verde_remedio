@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as SelectStories from "./select.stories"
+
+<Meta of={SelectStories} />
+
+# Select
+
+O **Select** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { Select } from "@/components/ui/select"
+
+export function Example() {
+  return (
+    <Select>
+      Conteúdo
+    </Select>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={SelectStories.Default} />
+</Canvas>

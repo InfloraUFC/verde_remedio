@@ -1,0 +1,63 @@
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks"
+import * as AspectRatioStories from "./aspect-ratio.stories"
+import { AspectRatio } from "./aspect-ratio"
+
+<Meta of={AspectRatioStories} />
+
+# AspectRatio
+
+O **AspectRatio** é um componente que mantém uma **proporção fixa entre largura e altura** para o conteúdo interno.
+
+Ele é útil para elementos como **imagens, vídeos, iframes e cards**, garantindo que o layout permaneça consistente mesmo durante o carregamento.
+
+---
+
+## Como funciona
+
+O componente utiliza a propriedade **`ratio`** para definir a proporção desejada.
+
+Exemplo comum:
+
+- `16 / 9` → vídeos
+- `1 / 1` → imagens quadradas
+- `4 / 3` → imagens tradicionais
+
+O conteúdo interno ocupa **100% da área disponível**.
+
+---
+
+## Estrutura básica
+
+```tsx
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+
+export function Example() {
+  return (
+    <AspectRatio ratio={16 / 9}>
+      <img
+        src="https://placehold.co/600x400"
+        alt="Example"
+        style={{ objectFit: "cover", width: "100%", height: "100%" }}
+      />
+    </AspectRatio>
+  )
+}
+```
+
+---
+
+## Controle interativo
+
+<Canvas>
+  <Controls of={AspectRatioStories.Default} />
+</Canvas>
+
+---
+
+## Props principais
+
+<ul>
+  <li><strong>ratio</strong> – define a proporção entre largura e altura (ex: <code>16 / 9</code>).</li>
+  <li><strong>children</strong> – conteúdo que será renderizado dentro da área proporcional.</li>
+  <li><strong>className</strong> – classes adicionais para estilização.</li>
+</ul>

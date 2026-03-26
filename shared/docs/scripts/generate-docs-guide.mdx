@@ -1,0 +1,255 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Documentation/Scripts/Generate docs script" />
+
+# Gerador de Documentação (`generate:docs`)
+
+O script **`generate:docs`** foi criado para **automatizar a criação da documentação de componentes do design system** no Storybook.
+Ele gera automaticamente os arquivos necessários para documentar um componente, seguindo o padrão definido no projeto.
+
+O objetivo é **padronizar a documentação**, reduzir trabalho manual e garantir consistência entre todos os componentes.
+
+---
+
+# Como funciona
+
+O script recebe **o nome do componente como argumento**, cria a pasta do componente (caso não exista) e gera automaticamente os seguintes arquivos:
+
+* `component.tsx` → arquivo base do componente
+* `component.stories.tsx` → stories utilizadas pelo Storybook
+* `component.mdx` → documentação do componente
+* `index.ts` → exportação do componente
+
+Todos esses arquivos são gerados a partir de **templates**, substituindo variáveis como:
+
+* `{{componentName}}`
+* `{{fileName}}`
+
+---
+
+# Estrutura utilizada
+
+O script utiliza a seguinte estrutura de diretórios:
+
+```
+config/
+  scripts/
+    generate-component.ts
+    templates/
+      component.template.tsx
+      story.template.ts
+      docs.template.mdx
+
+shared/
+  ui/
+```
+
+* **`generate-component.ts`**
+  Script responsável por gerar os arquivos.
+
+* **`templates/`**
+  Contém os modelos utilizados para gerar os arquivos.
+
+* **`shared/ui`**
+  Local onde os componentes são criados.
+
+---
+
+# Conversão automática de nomes
+
+O script converte automaticamente o nome do arquivo para **PascalCase** para gerar o nome do componente.
+
+Exemplo:
+
+<table>
+  <thead>
+    <tr>
+      <th>Comando</th>
+      <th>Arquivo</th>
+      <th>Componente</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        `pnpm generate skeleton`
+      </td>
+      <td>
+        `skeleton.tsx`
+      </td>
+      <td>
+        `Skeleton`
+      </td>
+    </tr>
+    <tr>
+      <td>
+        `pnpm generate accordion-item`
+      </td>
+      <td>
+        `accordion-item.tsx`
+      </td>
+      <td>
+        `AccordionItem`
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+Essa conversão permite manter o padrão comum de projetos React:
+
+* **arquivo:** `kebab-case`
+* **componente:** `PascalCase`
+
+---
+
+# Como usar
+
+Para gerar um novo componente documentado, execute:
+
+```bash
+pnpm generate nome-do-componente
+```
+
+Exemplo:
+
+```bash
+pnpm generate button
+```
+
+Isso irá gerar automaticamente:
+
+```
+shared/ui/button/
+
+button.tsx
+button.stories.tsx
+button.mdx
+index.ts
+```
+
+---
+
+# Arquivos gerados
+
+## Componente
+
+Arquivo responsável pela implementação do componente.
+
+```
+button.tsx
+```
+
+Contém a estrutura base do componente e suas props.
+
+---
+
+## Stories
+
+Arquivo utilizado pelo Storybook para renderizar exemplos do componente.
+
+```
+button.stories.tsx
+```
+
+Define:
+
+* o componente
+* os controles interativos
+* os exemplos exibidos no Storybook
+
+---
+
+## Documentação
+
+Arquivo `.mdx` responsável pela documentação exibida no Storybook.
+
+```
+button.mdx
+```
+
+Ele inclui:
+
+* descrição do componente
+* explicação de funcionamento
+* exemplo de uso
+* controles interativos
+* lista de props
+
+---
+
+## Index
+
+Arquivo utilizado para exportar o componente.
+
+```
+index.ts
+```
+
+Exemplo:
+
+```ts
+export * from "./button"
+```
+
+Isso facilita a importação do componente em outras partes do projeto.
+
+---
+
+# Templates
+
+Os arquivos gerados são baseados em templates localizados em:
+
+```
+config/scripts/templates
+```
+
+Esses templates contêm variáveis que são substituídas durante a geração:
+
+```
+{{componentName}}
+{{fileName}}
+```
+
+Exemplo de substituição:
+
+```
+{{componentName}} → Button
+{{fileName}} → button
+```
+
+---
+
+# Vantagens do script
+
+Utilizar o gerador de documentação traz vários benefícios:
+
+* padronização da documentação
+* redução de trabalho manual
+* criação rápida de novos componentes
+* consistência no design system
+* integração direta com Storybook
+
+---
+
+# Boas práticas
+
+Ao criar um novo componente:
+
+1. Gere o componente usando o script.
+2. Implemente a lógica do componente.
+3. Ajuste as stories para mostrar exemplos reais de uso.
+4. Atualize a documentação (`.mdx`) com as props e explicações necessárias.
+
+---
+
+# Futuras melhorias
+
+O script pode evoluir para incluir funcionalidades adicionais, como:
+
+* geração automática de **argTypes do Storybook**
+* leitura automática das **props do TypeScript**
+* geração automática de **testes**
+* CLI interativo para criação de componentes
+* geração automática de **exemplos de uso**
+
+Essas melhorias podem transformar o script em uma **ferramenta completa para gerenciamento do design system**.

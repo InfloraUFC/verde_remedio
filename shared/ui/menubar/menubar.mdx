@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as MenubarStories from "./menubar.stories"
+
+<Meta of={MenubarStories} />
+
+# Menubar
+
+O **Menubar** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { Menubar } from "@/components/ui/menubar"
+
+export function Example() {
+  return (
+    <Menubar>
+      Conteúdo
+    </Menubar>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={MenubarStories.Default} />
+</Canvas>

@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as LabelStories from "./label.stories"
+
+<Meta of={LabelStories} />
+
+# Label
+
+O **Label** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { Label } from "@/components/ui/label"
+
+export function Example() {
+  return (
+    <Label>
+      Conteúdo
+    </Label>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={LabelStories.Default} />
+</Canvas>

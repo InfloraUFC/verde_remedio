@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as NavigationMenuStories from "./navigation-menu.stories"
+
+<Meta of={NavigationMenuStories} />
+
+# NavigationMenu
+
+O **NavigationMenu** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { NavigationMenu } from "@/components/ui/navigation-menu"
+
+export function Example() {
+  return (
+    <NavigationMenu>
+      Conteúdo
+    </NavigationMenu>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={NavigationMenuStories.Default} />
+</Canvas>

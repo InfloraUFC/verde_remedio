@@ -1,0 +1,33 @@
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks"
+import * as {{componentName}}Stories from "./{{fileName}}.stories"
+import { {{componentName}} } from "./{{fileName}}"
+
+<Meta of={ {{componentName}}Stories } />
+
+# {{componentName}}
+
+Descrição do componente.
+
+## Como funciona
+
+Explique como o componente funciona.
+
+## Estrutura básica
+
+```tsx
+import { {{componentName}} } from "@/components/ui/{{fileName}}"
+
+export function Example() {
+  return (
+    <{{componentName}}>
+      Example
+    </{{componentName}}>
+  )
+}
+```
+
+## Controle interativo
+<Canvas> <Controls of={{{componentName}}Stories.Default} /> </Canvas>
+
+## Props principais
+<ul> <li><strong>className</strong> – classes adicionais.</li> </ul>

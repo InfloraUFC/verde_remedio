@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as ToggleStories from "./toggle.stories"
+
+<Meta of={ToggleStories} />
+
+# Toggle
+
+O **Toggle** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { Toggle } from "@/components/ui/toggle"
+
+export function Example() {
+  return (
+    <Toggle>
+      Conteúdo
+    </Toggle>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={ToggleStories.Default} />
+</Canvas>

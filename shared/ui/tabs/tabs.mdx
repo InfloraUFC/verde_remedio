@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as TabsStories from "./tabs.stories"
+
+<Meta of={TabsStories} />
+
+# Tabs
+
+O **Tabs** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { Tabs } from "@/components/ui/tabs"
+
+export function Example() {
+  return (
+    <Tabs>
+      Conteúdo
+    </Tabs>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={TabsStories.Default} />
+</Canvas>

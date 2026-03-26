@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as ChartStories from "./chart.stories"
+
+<Meta of={ChartStories} />
+
+# Chart
+
+O **Chart** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { Chart } from "@/components/ui/chart"
+
+export function Example() {
+  return (
+    <Chart>
+      Conteúdo
+    </Chart>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={ChartStories.Default} />
+</Canvas>

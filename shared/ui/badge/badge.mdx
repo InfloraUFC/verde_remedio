@@ -1,0 +1,61 @@
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks"
+import * as BadgeStories from "./badge.stories"
+
+<Meta of={BadgeStories} />
+
+# Badge
+
+O **Badge** é um componente utilizado para **destacar informações curtas** dentro da interface.
+
+Ele é normalmente utilizado para representar:
+
+- status
+- categorias
+- contagens
+- labels visuais
+
+O Badge possui diferentes **variantes visuais** que permitem adaptar sua aparência de acordo com o contexto da interface.
+
+## Como funciona
+
+O componente utiliza **class-variance-authority (CVA)** para controlar as variações de estilo através da prop `variant`.
+
+As variantes disponíveis são:
+
+- **default** – badge principal do design system.
+- **secondary** – versão com menor destaque visual.
+- **destructive** – utilizado para estados de erro ou ações destrutivas.
+- **outline** – badge com borda e fundo transparente.
+- **ghost** – badge minimalista com interação hover.
+- **link** – badge estilizado como link.
+
+O componente também suporta a prop `asChild`, que permite utilizar outro elemento HTML mantendo os estilos do Badge.
+
+## Estrutura básica
+
+```tsx
+import { Badge } from "@/components/ui/badge"
+
+export function Example() {
+  return (
+    <Badge variant="default">
+      Novo
+    </Badge>
+  )
+}
+```
+
+## Controle interativo
+<Canvas> 
+  <Controls of={BadgeStories.Default} /> 
+</Canvas>
+
+## Exemplo Variantes
+<Canvas of={BadgeStories.AllVariants} />
+
+## Props principais
+<ul> 
+  <li> <strong>variant</strong> – define o estilo visual do badge. Aceita <code>default</code>, <code>secondary</code>, <code>destructive</code>, <code>outline</code>, <code>ghost</code> ou <code>link</code>. </li> 
+  <li> <strong>asChild</strong> – permite renderizar o Badge utilizando outro elemento ou componente como base, mantendo os estilos. </li> 
+  <li> <strong>className</strong> – permite adicionar classes extras para customização do componente. </li> <li> Todos os props nativos do elemento <code>span</code> também são suportados. </li> 
+</ul>

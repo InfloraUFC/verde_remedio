@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, Controls } from "@storybook/addon-docs/blocks"
+import * as DropdownMenuStories from "./dropdown-menu.stories"
+
+<Meta of={DropdownMenuStories} />
+
+# DropdownMenu
+
+O **DropdownMenu** é um componente de interface utilizado dentro do design system para compor interfaces consistentes.
+
+## Como funciona
+
+Este componente encapsula estilos e comportamento reutilizável.
+
+## Estrutura básica
+
+```tsx
+import { DropdownMenu } from "@/components/ui/dropdown-menu"
+
+export function Example() {
+  return (
+    <DropdownMenu>
+      Conteúdo
+    </DropdownMenu>
+  )
+}
+```
+
+## Exemplo básico
+
+<Canvas>
+  <Story of={DropdownMenuStories.Default} />
+</Canvas>
