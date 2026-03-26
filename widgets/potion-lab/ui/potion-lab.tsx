@@ -1,7 +1,7 @@
 "use client"
 
 import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from "@dnd-kit/core"
-import { Cauldron, useCauldronStore } from "@/features"
+import { BookDialog, Cauldron, useCauldronStore } from "@/features"
 import { Ingredient, INGREDIENTS } from "@/entities"
 import { IngredientSidebar } from "./ingredient-sidebar"
 import React from "react"
@@ -44,7 +44,8 @@ export function PotionLab() {
         <div className="flex-1 flex items-center justify-center">
           <Cauldron />
         </div>
-
+        
+        <BookDialog />
       </div>
     </DndContext>
   )
