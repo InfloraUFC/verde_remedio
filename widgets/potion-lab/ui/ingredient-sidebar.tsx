@@ -1,8 +1,6 @@
-// widgets/potion-lab/ui/ingredient-sidebar.tsx
-
 "use client"
 
-import { IngredientCard } from "@/features/drag-ingredient/ui/ingredient-card"
+import { DraggableIngredient } from "@/features/drag-ingredient/ui/draggable-ingredient-card"
 import { Ingredient } from "@/entities"
 
 type Props = {
@@ -15,7 +13,7 @@ export function IngredientSidebar({ ingredients }: Props) {
       <h2 className="font-bold">Ingredientes</h2>
 
       {ingredients.map((ingredient) => (
-        <IngredientCard
+        <DraggableIngredient
           key={ingredient.id}
           ingredient={ingredient}
         />

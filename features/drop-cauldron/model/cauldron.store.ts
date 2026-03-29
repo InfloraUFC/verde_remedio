@@ -3,7 +3,7 @@ import type { CauldronState } from "./index"
 
 export const useCauldronStore = create<CauldronState>((set) => ({
   ingredients: [],
-  limit: 1000,
+  limit: 4,
 
   setLimit: (limit) => set({ limit }),
 
@@ -11,7 +11,7 @@ export const useCauldronStore = create<CauldronState>((set) => ({
     set((state) => {
       if (state.ingredients.length >= state.limit) return state;
 
-      // if (state.ingredients.some(i => i.id === ingredient.id)) return state
+      if (state.ingredients.some(i => i.id === ingredient.id)) return state
 
       return {
         ingredients: [...state.ingredients, ingredient]

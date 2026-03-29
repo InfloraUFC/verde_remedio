@@ -1,11 +1,11 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import { Dialog, DialogContent, DialogTrigger, Button } from "@/shared/ui"
+import { Dialog, DialogContent, DialogTrigger, Button, DialogTitle } from "@/shared/ui"
 import { BookOpen } from "lucide-react"
 import { useBookStore } from "../model"
 
-const SPREADS = [
+const PAGES = [
   { left: "Fogo", right: "Água" },
   { left: "Terra", right: "Ar" },
   { left: "Luz", right: "Trevas" },
@@ -13,10 +13,10 @@ const SPREADS = [
 ]
 
 export function BookDialog() {
-  const { spread, isFlipping, nextPage } = useBookStore()
+  const { page, isFlipping, nextPage } = useBookStore()
 
-  const current = SPREADS[spread]
-  const next = SPREADS[(spread + 1) % SPREADS.length]
+  const current = PAGES[page]
+  const next = PAGES[(page + 1) % PAGES.length]
 
   return (
     <Dialog>
@@ -27,6 +27,7 @@ export function BookDialog() {
       </DialogTrigger>
 
       <DialogContent className="min-w-175 h-125 p-0 bg-transparent border-none shadow-none">
+        <DialogTitle className="hidden"></DialogTitle>
         <div
           className="relative w-full h-full flex rounded-xl overflow-hidden shadow-lg"
           style={{ perspective: "1500px" }}
@@ -44,10 +45,10 @@ export function BookDialog() {
           <AnimatePresence>
             {isFlipping && (
               <motion.div
-                key={spread}
+                key={page}
                 initial={{ rotateY: 0 }}
                 animate={{ rotateY: -180 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
                 style={{
                   transformOrigin: "left",
                   transformStyle: "preserve-3d",
@@ -81,7 +82,7 @@ export function BookDialog() {
           </AnimatePresence>
 
           <button
-            onClick={() => nextPage(SPREADS.length)}
+            onClick={() => nextPage(PAGES.length)}
             className="absolute right-4 bottom-4"
           >
             ▶

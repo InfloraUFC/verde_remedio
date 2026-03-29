@@ -1,1 +1,1 @@
-export * from './ingredient-card'
+export * from './draggable-ingredient-card'

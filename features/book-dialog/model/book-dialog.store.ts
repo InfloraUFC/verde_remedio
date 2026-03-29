@@ -1,14 +1,14 @@
 import { create } from "zustand"
 
 type BookState = {
-  spread: number
+  page: number
   isFlipping: boolean
 
   nextPage: (total: number) => void
 }
 
 export const useBookStore = create<BookState>((set, get) => ({
-  spread: 0,
+  page: 0,
   isFlipping: false,
 
   nextPage: (total) => {
@@ -18,7 +18,7 @@ export const useBookStore = create<BookState>((set, get) => ({
 
     setTimeout(() => {
       set((state) => ({
-        spread: (state.spread + 1) % total,
+        page: (state.page + 1) % total,
         isFlipping: false,
       }))
     }, 600)

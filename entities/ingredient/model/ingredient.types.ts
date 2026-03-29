@@ -1,7 +1,8 @@
 export const IngredientTypeEnum = {
-  FIRE: 0,
+  SUGAR: 0,
   WATER: 1,
-  EARTH: 2
+  SALT: 2,
+  PLANT: 3,
 } as const
 
 export type IngredientType =
