@@ -1,11 +1,13 @@
 import { create } from "zustand"
 import type { CauldronState } from "./index"
 
-export const useCauldronStore = create<CauldronState>((set) => ({
+export const useCauldronStore = create<CauldronState>((set, get) => ({
   ingredients: [],
   limit: 4,
 
   setLimit: (limit) => set({ limit }),
+
+  isCauldronFull: () => get().ingredients.length === get().limit,
 
   addIngredient: (ingredient) =>
     set((state) => {
@@ -23,5 +25,5 @@ export const useCauldronStore = create<CauldronState>((set) => ({
       ingredients: state.ingredients.filter((i) => i.id !== id),
     })),
 
-  clear: () => set({ ingredients: [] }),
+  clearIngredients: () => set({ ingredients: [] }),
 }))

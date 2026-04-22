@@ -1,4 +1,3 @@
-// app/potion/page.tsx
 
 import { IngredientList } from "@/features"
 import { PotionLab } from "@/widgets"

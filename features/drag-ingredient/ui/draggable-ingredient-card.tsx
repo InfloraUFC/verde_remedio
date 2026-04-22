@@ -20,7 +20,7 @@ export function DraggableIngredient({ ingredient }: { ingredient: Ingredient }) 
           : undefined,
       }}
     >
-      <IngredientCard ingredient={ingredient} />
+      <IngredientCard ingredient={ingredient} className="cursor-grab" />
     </div>
   )
 }
