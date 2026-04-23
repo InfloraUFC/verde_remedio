@@ -1,15 +1,18 @@
-import { Potion, Client, Ingredient } from "@/entities"
+import { Potion, Client, InstrumentKey, IngredientKey } from "@/entities"
 
 export type Recipe = {
   id: string
-  // TODO: VERIFICAR SE SERIA BOM REMETER A UM ENUM E DEPOIS COMPARAR OU JÁ JOGAR PARA A POÇAO EM SI
+
   result: Potion
-  // TODO: ADICIONAR INSTRUMENTOS
-  ingredients: Ingredient[]
+
+  // TODO: remete a key para no futuro usar um Object Literal e linkar
+  instruments: InstrumentKey[]
+  ingredients: IngredientKey[]
+
   description: string
   properties: string[]
   preparation: string
-  
+
   references?: string[]
   clients?: Client[]
   scientificName?: string
