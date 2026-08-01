@@ -5,3 +5,6 @@ export * from './badge';
 export * from './skeleton';
 export * from './button';
 export * from './dialog';
+export * from './tabs';
+export * from './scroll-area';
+export * from './item-image';

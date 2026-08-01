@@ -1,4 +1,6 @@
 export * from './drag-ingredient'
+export * from './drag-instrument'
 export * from './drop-cauldron'
 export * from './book-dialog'
 export * from './ingredient-list'
+export * from './brew-potion'

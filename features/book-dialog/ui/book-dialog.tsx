@@ -1,94 +1,145 @@
 "use client"
 
-import { motion, AnimatePresence } from "framer-motion"
-import { Dialog, DialogContent, DialogTrigger, Button, DialogTitle } from "@/shared/ui"
-import { BookOpen } from "lucide-react"
-import { useBookStore } from "../model"
+import { BookOpen, Leaf } from "lucide-react"
+import {
+  Badge,
+  Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+  ItemImage,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/shared/ui"
+import {
+  getIngredientByKey,
+  getInstrumentByKey,
+  Ingredient,
+  INGREDIENT_KINDS,
+  INGREDIENTS,
+  Recipe,
+  RECIPES,
+  TREATMENT_LABELS,
+} from "@/entities"
+import { FlipBook } from "./flip-book"
 
-const PAGES = [
-  { left: "Fogo", right: "Água" },
-  { left: "Terra", right: "Ar" },
-  { left: "Luz", right: "Trevas" },
-  { left: "Gelo", right: "Vapor" },
-]
+const PLANTS = INGREDIENTS.filter((i) => i.kind === INGREDIENT_KINDS.PLANT)
 
 export function BookDialog() {
-  const { page, isFlipping, nextPage } = useBookStore()
-
-  const current = PAGES[page]
-  const next = PAGES[(page + 1) % PAGES.length]
-
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size="icon">
-          <BookOpen className="w-5 h-5" />
+        <Button variant="outline" size="icon" title="Livro de plantas e receitas">
+          <BookOpen className="size-5" />
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="min-w-175 h-125 p-0 bg-transparent border-none shadow-none">
-        <DialogTitle className="hidden"></DialogTitle>
-        <div
-          className="relative w-full h-full flex rounded-xl overflow-hidden shadow-lg"
-          style={{ perspective: "1500px" }}
+      <DialogContent className="h-[80vh] w-full max-w-6xl! border-none bg-amber-600 p-0 shadow-none">
+        <DialogTitle className="sr-only">Livro de plantas e receitas</DialogTitle>
+
+        <Tabs
+          defaultValue="plants"
+          className="flex h-full flex-col overflow-hidden rounded-xl shadow-2xl"
         >
-          <div className="w-1/2 bg-amber-100 p-6 border-r">
-            <h2 className="font-bold mb-4">Esquerda</h2>
-            <p>{current.left}</p>
-          </div>
+          <TabsList className="mx-auto mt-2 bg-amber-200/85">
+            <TabsTrigger value="plants">Plantas</TabsTrigger>
+            <TabsTrigger value="recipes">Receitas</TabsTrigger>
+          </TabsList>
 
-          <div className="w-1/2 bg-amber-50 p-6">
-            <h2 className="font-bold mb-4">Direita</h2>
-            <p>{current.right}</p>
-          </div>
+          <TabsContent value="plants" className="mt-2 min-h-0 flex-1">
+            <FlipBook items={PLANTS} renderItem={renderPlantPage} />
+          </TabsContent>
 
-          <AnimatePresence>
-            {isFlipping && (
-              <motion.div
-                key={page}
-                initial={{ rotateY: 0 }}
-                animate={{ rotateY: -180 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                style={{
-                  transformOrigin: "left",
-                  transformStyle: "preserve-3d",
-                  position: "absolute",
-                  right: 0,
-                  top: 0,
-                  width: "50%",
-                  height: "100%",
-                }}
-              >
-                <div
-                  className="absolute inset-0 bg-amber-50 p-6"
-                  style={{ backfaceVisibility: "hidden" }}
-                >
-                  <h2 className="font-bold mb-4">Direita</h2>
-                  <p>{current.right}</p>
-                </div>
-
-                <div
-                  className="absolute inset-0 bg-amber-200 p-6"
-                  style={{
-                    transform: "rotateY(180deg)",
-                    backfaceVisibility: "hidden",
-                  }}
-                >
-                  <h2 className="font-bold mb-4">Próxima</h2>
-                  <p>{next.left}</p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <button
-            onClick={() => nextPage(PAGES.length)}
-            className="absolute right-4 bottom-4"
-          >
-            ▶
-          </button>
-        </div>
+          <TabsContent value="recipes" className="mt-2 min-h-0 flex-1">
+            <FlipBook items={RECIPES} renderItem={renderRecipePage} />
+          </TabsContent>
+        </Tabs>
       </DialogContent>
     </Dialog>
+  )
+}
+
+function renderPlantPage(plant: Ingredient) {
+  return (
+    <div className="flex flex-col gap-2">
+      <ItemImage
+        src={plant.image}
+        alt={plant.popularName}
+        icon={<Leaf className="size-8" />}
+        className="size-20 rounded-md bg-white/70 text-emerald-800 ring-1 ring-black/10"
+      />
+
+      <h3 className="font-serif text-lg font-semibold text-amber-950">
+        {plant.popularName}
+      </h3>
+
+      {plant.scientificName && (
+        <p className="text-xs text-amber-900/70 italic">
+          {plant.scientificName}
+          {plant.family && ` · ${plant.family}`}
+        </p>
+      )}
+
+      <div className="flex flex-wrap gap-1">
+        {plant.properties.map((property) => (
+          <Badge key={property} variant="secondary">
+            {property}
+          </Badge>
+        ))}
+      </div>
+
+      {plant.observation && (
+        <p className="text-sm leading-relaxed text-amber-900/80">
+          {plant.observation}
+        </p>
+      )}
+    </div>
+  )
+}
+
+function renderRecipePage(recipe: Recipe) {
+  const instrument = getInstrumentByKey(recipe.type)
+
+  const ingredientNames = recipe.ingredients
+    .map((key) => getIngredientByKey(key)?.popularName)
+    .filter(Boolean)
+    .join(" + ")
+
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex items-start justify-between gap-2">
+        <h3 className="font-serif text-lg font-semibold text-amber-950">
+          {recipe.name}
+        </h3>
+        <Badge>{TREATMENT_LABELS[recipe.treatmentFor]}</Badge>
+      </div>
+
+      <p className="text-sm text-amber-900/80">{recipe.description}</p>
+
+      <p className="text-xs font-medium text-amber-900/70 capitalize">
+        {instrument.type} · {ingredientNames} + {instrument.name}
+      </p>
+
+      <div className="flex flex-wrap gap-1">
+        {recipe.properties.map((property) => (
+          <Badge key={property} variant="secondary">
+            {property}
+          </Badge>
+        ))}
+      </div>
+
+      <p className="text-sm leading-relaxed text-amber-900/80">
+        {recipe.preparation}
+      </p>
+
+      {recipe.clients && recipe.clients.length > 0 && (
+        <p className="text-xs text-amber-900/60">
+          Cliente: {recipe.clients.map((c) => c.name).join(", ")}
+        </p>
+      )}
+    </div>
   )
 }

@@ -1,13 +1,13 @@
 "use client"
 
-import { Ingredient, IngredientCard } from "@/entities"
+import { Instrument, InstrumentCard } from "@/entities"
 import { useDraggable } from "@dnd-kit/core"
 import { cn } from "@/lib/utils"
 
-export function DraggableIngredient({ ingredient }: { ingredient: Ingredient }) {
+export function DraggableInstrument({ instrument }: { instrument: Instrument }) {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
-    id: ingredient.id,
-    data: { kind: "ingredient", ingredient },
+    id: instrument.id,
+    data: { kind: "instrument", instrument },
   })
 
   return (
@@ -25,8 +25,8 @@ export function DraggableIngredient({ ingredient }: { ingredient: Ingredient }) 
           : undefined,
       }}
     >
-      <IngredientCard
-        ingredient={ingredient}
+      <InstrumentCard
+        instrument={instrument}
         className="w-full cursor-grab active:cursor-grabbing hover:-translate-y-0.5"
       />
       <div className="h-1.5 w-20 rounded-full shelf-plank" />

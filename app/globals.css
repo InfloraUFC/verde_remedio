@@ -127,3 +127,54 @@
     @apply font-sans;
   }
 }
+
+/* ---------- Tema "botica de alquimia" (bancada) ---------- */
+
+@layer utilities {
+  .bg-wood-panel {
+    background-color: #8a5a30;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.09) 0px,
+        rgba(0, 0, 0, 0.09) 2px,
+        transparent 2px,
+        transparent 64px
+      ),
+      linear-gradient(180deg, #a06c3a 0%, #7a4c26 100%);
+  }
+
+  .bg-parchment {
+    background-color: #f3e6c8;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(139, 94, 43, 0.08), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(139, 94, 43, 0.08), transparent 40%);
+  }
+
+  .shelf-plank {
+    background: linear-gradient(180deg, #e7c58f 0%, #c2925a 100%);
+    box-shadow:
+      0 2px 0 rgba(0, 0, 0, 0.25),
+      0 4px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .bg-cauldron {
+    background: radial-gradient(120% 100% at 50% 0%, #4b5e46 0%, #2f3b2b 70%, #232c20 100%);
+  }
+}
+
+@keyframes cauldron-bubble {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+.animate-cauldron-bubble {
+  animation: cauldron-bubble 2.6s ease-in-out infinite;
+}

@@ -1,2 +1,5 @@
 export * from './potion-lab'
-export * from './ingredient-sidebar'
+export * from './shelf'
+export * from './plant-shelf'
+export * from './base-ingredient-shelf'
+export * from './instrument-shelf'

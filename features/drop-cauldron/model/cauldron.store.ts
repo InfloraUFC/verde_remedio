@@ -3,7 +3,8 @@ import type { CauldronState } from "./index"
 
 export const useCauldronStore = create<CauldronState>((set, get) => ({
   ingredients: [],
-  limit: 4,
+  limit: 5,
+  instrument: null,
 
   setLimit: (limit) => set({ limit }),
 
@@ -26,4 +27,11 @@ export const useCauldronStore = create<CauldronState>((set, get) => ({
     })),
 
   clearIngredients: () => set({ ingredients: [] }),
+
+  // Só existe 1 instrumento por vez: soltar um novo substitui o anterior.
+  setInstrument: (instrument) => set({ instrument }),
+
+  removeInstrument: () => set({ instrument: null }),
+
+  reset: () => set({ ingredients: [], instrument: null }),
 }))
