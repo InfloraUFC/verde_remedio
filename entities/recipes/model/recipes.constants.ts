@@ -1,6 +1,6 @@
 import { INGREDIENT_KEYS } from "@/entities/ingredient"
 import { INSTRUMENTS_KEYS } from "@/entities/instruments"
-import { CLIENTS } from "@/entities/client"
+import { CLIENTS } from "@/entities/client/model/client.constants"
 import { Recipe, TREATMENT_CONSTANT } from "./recipes.types"
 
 const [luciana, luiz, amanda] = CLIENTS

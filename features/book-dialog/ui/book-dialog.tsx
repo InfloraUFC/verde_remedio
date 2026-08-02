@@ -21,16 +21,26 @@ import {
   INGREDIENT_KINDS,
   INGREDIENTS,
   Recipe,
-  RECIPES,
   TREATMENT_LABELS,
 } from "@/entities"
+import { getLevel, getUnlockedRecipes } from "@/entities/level"
+import { useGameProgressStore } from "@/features/game-progress"
 import { FlipBook } from "./flip-book"
 
-const PLANTS = INGREDIENTS.filter((i) => i.kind === INGREDIENT_KINDS.PLANT)
-
 export function BookDialog() {
+  const levelId = useGameProgressStore((s) => s.levelId)
+  const markBookOpened = useGameProgressStore((s) => s.markBookOpened)
+
+  const unlockedRecipes = getUnlockedRecipes(getLevel(levelId))
+  const unlockedPlantKeys = new Set(
+    unlockedRecipes.flatMap((recipe) => recipe.ingredients)
+  )
+  const plants = INGREDIENTS.filter(
+    (i) => i.kind === INGREDIENT_KINDS.PLANT && unlockedPlantKeys.has(i.key)
+  )
+
   return (
-    <Dialog>
+    <Dialog onOpenChange={(open) => open && markBookOpened()}>
       <DialogTrigger asChild>
         <Button variant="outline" size="icon" title="Livro de plantas e receitas">
           <BookOpen className="size-5" />
@@ -50,11 +60,11 @@ export function BookDialog() {
           </TabsList>
 
           <TabsContent value="plants" className="mt-2 min-h-0 flex-1">
-            <FlipBook items={PLANTS} renderItem={renderPlantPage} />
+            <FlipBook items={plants} renderItem={renderPlantPage} />
           </TabsContent>
 
           <TabsContent value="recipes" className="mt-2 min-h-0 flex-1">
-            <FlipBook items={RECIPES} renderItem={renderRecipePage} />
+            <FlipBook items={unlockedRecipes} renderItem={renderRecipePage} />
           </TabsContent>
         </Tabs>
       </DialogContent>

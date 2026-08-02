@@ -1,7 +1,7 @@
 import { IngredientKey } from "@/entities/ingredient"
 import { InstrumentKey } from "@/entities/instruments"
 import { RECIPES } from "./recipes.constants"
-import { Recipe } from "./recipes.types"
+import { Recipe, TreatmentForType } from "./recipes.types"
 
 function sameIngredientSet(a: IngredientKey[], b: IngredientKey[]): boolean {
   if (a.length !== b.length) return false
@@ -39,5 +39,20 @@ export function findRecipeMatch(
         recipe.type === instrumentKey &&
         sameIngredientSet(recipe.ingredients, ingredientKeys)
     ) ?? null
+  )
+}
+
+/**
+ * Verifica se o instrumento solto é o mesmo usado por ALGUMA receita que
+ * trata a condição informada — ou seja, "o modo de preparo tá certo pra
+ * esse mal, mas os ingredientes não batem". Usado pra decidir acerto
+ * parcial (ver `findRecipeMatch` para o acerto exato).
+ */
+export function treatsCondition(
+  instrumentKey: InstrumentKey,
+  treatmentFor: TreatmentForType
+): boolean {
+  return RECIPES.some(
+    (recipe) => recipe.type === instrumentKey && recipe.treatmentFor === treatmentFor
   )
 }

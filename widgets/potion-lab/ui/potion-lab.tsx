@@ -2,7 +2,18 @@
 
 import React from "react"
 import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from "@dnd-kit/core"
-import { BookDialog, BrewButton, BrewResult, Cauldron, IngredientList, useCauldronStore } from "@/features"
+import {
+  BookDialog,
+  BrewButton,
+  BrewResult,
+  Cauldron,
+  Hearts,
+  IngredientList,
+  LevelBar,
+  useCauldronStore,
+  useGameProgressStore,
+  useHydrateGameProgress,
+} from "@/features"
 import {
   Ingredient,
   IngredientCard,
@@ -12,11 +23,13 @@ import {
   INGREDIENTS,
   INSTRUMENTS_BY_KEYS,
 } from "@/entities"
+import { getLevel, getUnlockedInstrumentKeys, getUnlockedPlantKeys } from "@/entities/level"
 import { PlantShelf } from "./plant-shelf"
 import { BaseIngredientShelf } from "./base-ingredient-shelf"
 import { InstrumentShelf } from "./instrument-shelf"
+import { ClientScene } from "./client-scene"
 
-const PLANTS = INGREDIENTS.filter((i) => i.kind === INGREDIENT_KINDS.PLANT)
+const ALL_PLANTS = INGREDIENTS.filter((i) => i.kind === INGREDIENT_KINDS.PLANT)
 const BASES = INGREDIENTS.filter((i) => i.kind !== INGREDIENT_KINDS.PLANT)
 
 type DragData =
@@ -24,10 +37,23 @@ type DragData =
   | { kind: "instrument"; instrument: Instrument }
 
 export function PotionLab() {
+  const hydrated = useHydrateGameProgress()
+
   const addIngredient = useCauldronStore((s) => s.addIngredient)
   const setInstrument = useCauldronStore((s) => s.setInstrument)
 
+  const levelId = useGameProgressStore((s) => s.levelId)
+
   const [activeDrag, setActiveDrag] = React.useState<DragData | null>(null)
+
+  const level = getLevel(levelId)
+  const unlockedPlantKeys = new Set(getUnlockedPlantKeys(level))
+  const unlockedInstrumentKeys = new Set(getUnlockedInstrumentKeys(level))
+
+  const plants = ALL_PLANTS.filter((p) => unlockedPlantKeys.has(p.key))
+  const instruments = INSTRUMENTS_BY_KEYS.filter((i) =>
+    unlockedInstrumentKeys.has(i.key)
+  )
 
   function handleDragStart(event: DragStartEvent) {
     setActiveDrag(event.active.data.current as DragData)
@@ -46,28 +72,37 @@ export function PotionLab() {
     setActiveDrag(null)
   }
 
+  // evita piscar/renderizar estado desatualizado antes da reidratação do localStorage
+  if (!hydrated) {
+    return <div className="bg-parchment min-h-dvh" />
+  }
+
   return (
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <div className="bg-parchment flex min-h-dvh flex-col gap-4 p-4">
-        <header className="flex items-center justify-between">
+      <div className="bg-parchment flex min-h-dvh flex-col gap-3 p-4">
+        <header className="flex flex-wrap items-center justify-between gap-3">
           <h1 className="font-serif text-lg font-semibold text-amber-950">
             Verde Remédio
           </h1>
+
+          <div className="flex items-center gap-4">
+            <LevelBar />
+            <Hearts />
+          </div>
+
           <BookDialog />
         </header>
 
         <div className="grid flex-1 grid-cols-[15rem_1fr_15rem] gap-4">
           {/* Coluna esquerda: plantas em cima, bases (água/óleo/álcool) embaixo */}
           <div className="flex min-h-0 flex-col gap-3">
-            <PlantShelf plants={PLANTS} />
+            <PlantShelf plants={plants} />
             <BaseIngredientShelf bases={BASES} />
           </div>
 
-          {/* Centro: cena (reservada) + caldeirão e itens no rodapé */}
+          {/* Centro: cliente + caldeirão e itens no rodapé */}
           <div className="flex min-w-0 flex-col justify-end gap-4 pb-2">
-            <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-amber-900/15 text-xs text-amber-900/40">
-              Cena do cliente (em breve)
-            </div>
+            <ClientScene />
 
             <div className="flex flex-col items-center gap-4">
               <Cauldron />
@@ -78,7 +113,7 @@ export function PotionLab() {
           </div>
 
           {/* Coluna direita: instrumentos, arrastáveis para o caldeirão */}
-          <InstrumentShelf instruments={INSTRUMENTS_BY_KEYS} />
+          <InstrumentShelf instruments={instruments} />
         </div>
       </div>
 
