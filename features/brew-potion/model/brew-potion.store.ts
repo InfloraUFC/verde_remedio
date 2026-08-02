@@ -1,14 +1,15 @@
 import { create } from "zustand"
-import { Recipe } from "@/entities"
+import { Client, Recipe, TreatmentForType } from "@/entities"
 
-export type BrewOutcome =
+export type BrewFeedback =
   | { status: "idle" }
-  | { status: "success"; recipe: Recipe }
-  | { status: "failure" }
+  | { status: "success"; recipe: Recipe; client: Client }
+  | { status: "partial"; treatmentFor: TreatmentForType; client: Client }
+  | { status: "failure"; client: Client }
 
 type BrewState = {
-  result: BrewOutcome
-  setResult: (result: BrewOutcome) => void
+  result: BrewFeedback
+  setResult: (result: BrewFeedback) => void
   reset: () => void
 }
 

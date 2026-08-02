@@ -2,8 +2,10 @@
 
 import { FlaskConical } from "lucide-react"
 import { Button } from "@/shared/ui"
-import { findRecipeMatch } from "@/entities"
+import { CLIENTS, findRecipeMatch, treatsCondition } from "@/entities"
+import { getLevel } from "@/entities/level"
 import { useCauldronStore } from "@/features/drop-cauldron"
+import { useGameProgressStore } from "@/features/game-progress"
 import { useBrewStore } from "../model"
 
 export function BrewButton() {
@@ -12,15 +14,49 @@ export function BrewButton() {
   const resetCauldron = useCauldronStore((s) => s.reset)
   const setResult = useBrewStore((s) => s.setResult)
 
+  const levelId = useGameProgressStore((s) => s.levelId)
+  const clientIndex = useGameProgressStore((s) => s.client.clientIndex)
+  const attempts = useGameProgressStore((s) => s.client.attempts)
+  const registerBrewAttempt = useGameProgressStore((s) => s.registerBrewAttempt)
+
   const disabled = ingredients.length === 0 || !instrument
 
   function handleBrew() {
-    const match = findRecipeMatch(
-      ingredients.map((i) => i.key),
-      instrument?.key ?? null
-    )
+    if (!instrument) return
 
-    setResult(match ? { status: "success", recipe: match } : { status: "failure" })
+    const level = getLevel(levelId)
+    const clientId = level.clientIds[clientIndex % level.clientIds.length]
+    const client = CLIENTS.find((c) => c.id === clientId)
+    if (!client) return
+
+    const targetTreatment = client.conditions[0].treatmentFor
+    const ingredientKeys = ingredients.map((i) => i.key)
+
+    const exactMatch = findRecipeMatch(ingredientKeys, instrument.key)
+    const isExactForClient = exactMatch?.treatmentFor === targetTreatment
+
+    // acerto total: receita exata E que trata a condição desse cliente
+    if (isExactForClient && exactMatch) {
+      setResult({ status: "success", recipe: exactMatch, client })
+      registerBrewAttempt("success")
+      resetCauldron()
+      return
+    }
+
+    // acerto parcial: instrumento certo pra essa condição, mas só libera
+    // depois de já ter errado esse cliente pelo menos 1 vez
+    const canBePartial =
+      attempts > 0 && treatsCondition(instrument.key, targetTreatment)
+
+    if (canBePartial) {
+      setResult({ status: "partial", treatmentFor: targetTreatment, client })
+      registerBrewAttempt("partial")
+      resetCauldron()
+      return
+    }
+
+    setResult({ status: "failure", client })
+    registerBrewAttempt("failure")
     resetCauldron()
   }
 
