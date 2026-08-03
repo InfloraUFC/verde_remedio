@@ -1,5 +1,5 @@
-import { PotionLab } from "@/widgets"
+import { AppShell } from "@/widgets"
 
 export default function Home() {
-  return <PotionLab />
+  return <AppShell />
 }

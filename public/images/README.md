@@ -15,3 +15,7 @@ Ex: `sugar.png`, `tea.png`, `cataplasm.png`, `bottle.png`, `powder.png`.
 ## Clientes (`/images/clients/`)
 Nome do arquivo = campo `portrait` de cada cliente em `entities/client/model/client.constants.ts`.
 Ex: `luciana.png`, `luiz.png`, `amanda.png`.
+
+## Cenas (`/images/scenes/`)
+- `start-screen.png` — ilustração da tela inicial (igual ao modelo do Canva
+  que você mandou: prateleira, personagem lendo, porta, bancada, plantas).

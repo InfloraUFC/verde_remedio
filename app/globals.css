@@ -161,6 +161,26 @@
   .bg-cauldron {
     background: radial-gradient(120% 100% at 50% 0%, #4b5e46 0%, #2f3b2b 70%, #232c20 100%);
   }
+
+  .bg-brick-frame {
+    background-color: #9c4a2e;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.18) 0px,
+        rgba(0, 0, 0, 0.18) 3px,
+        transparent 3px,
+        transparent 46px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.12) 0px,
+        rgba(0, 0, 0, 0.12) 3px,
+        transparent 3px,
+        transparent 92px
+      ),
+      linear-gradient(180deg, #b5613c 0%, #92462a 100%);
+  }
 }
 
 @keyframes cauldron-bubble {

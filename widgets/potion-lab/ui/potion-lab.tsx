@@ -10,6 +10,7 @@ import {
   Hearts,
   IngredientList,
   LevelBar,
+  SoundToggle,
   useCauldronStore,
   useGameProgressStore,
   useHydrateGameProgress,
@@ -36,7 +37,11 @@ type DragData =
   | { kind: "ingredient"; ingredient: Ingredient }
   | { kind: "instrument"; instrument: Instrument }
 
-export function PotionLab() {
+type Props = {
+  onShowCredits?: () => void
+}
+
+export function PotionLab({ onShowCredits }: Props = {}) {
   const hydrated = useHydrateGameProgress()
 
   const addIngredient = useCauldronStore((s) => s.addIngredient)
@@ -90,7 +95,19 @@ export function PotionLab() {
             <Hearts />
           </div>
 
-          <BookDialog />
+          <div className="flex items-center gap-2">
+            <BookDialog />
+            {onShowCredits && (
+              <button
+                onClick={onShowCredits}
+                title="Ver créditos"
+                className="text-xs font-medium text-amber-900/60 underline underline-offset-2 hover:text-amber-900"
+              >
+                Créditos
+              </button>
+            )}
+            <SoundToggle />
+          </div>
         </header>
 
         <div className="grid flex-1 grid-cols-[15rem_1fr_15rem] gap-4">
