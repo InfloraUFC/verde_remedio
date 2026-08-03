@@ -81,7 +81,7 @@ export const useGameProgressStore = create<GameProgressState>()(
 
         // --- acertou (total ou parcial): ganha estrelas e passa pro próximo cliente ---
         const earnedStars = tier === "success" ? 50 : 25
-        let stars = state.stars + earnedStars
+        const stars = state.stars + earnedStars
         const totalStars = state.totalStars + earnedStars
         const nextClientIndex =
           (state.client.clientIndex + 1) % level.clientIds.length
