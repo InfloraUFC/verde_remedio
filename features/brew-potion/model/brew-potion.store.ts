@@ -6,6 +6,7 @@ export type BrewFeedback =
   | { status: "success"; recipe: Recipe; client: Client }
   | { status: "partial"; treatmentFor: TreatmentForType; client: Client }
   | { status: "failure"; client: Client }
+  | { status: "repeated"; recipe: Recipe; client: Client }
 
 type BrewState = {
   result: BrewFeedback

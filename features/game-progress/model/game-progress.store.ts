@@ -19,13 +19,15 @@ type GameProgressState = {
   totalStars: number
   lives: number
   bookOpenedThisLevel: boolean
+  /** quantas vezes cada receita (id) foi feita com sucesso NESTE nível */
+  recipeUses: Record<string, number>
   client: ClientProgress
   status: GameStatus
   /** última mensagem de "meta-jogo" (subiu de nível, perdeu tudo, venceu...) */
   lastMessage: string | null
 
   markBookOpened: () => void
-  registerBrewAttempt: (tier: BrewTier) => void
+  registerBrewAttempt: (tier: BrewTier, recipeId?: string) => void
   dismissMessage: () => void
   resetGame: () => void
 }
@@ -38,6 +40,7 @@ function freshLevelState(levelId: number) {
     stars: 0,
     lives: level.lives,
     bookOpenedThisLevel: false,
+    recipeUses: {} as Record<string, number>,
     client: { clientIndex: 0, attempts: 0 } satisfies ClientProgress,
   }
 }
@@ -54,7 +57,7 @@ export const useGameProgressStore = create<GameProgressState>()(
 
       dismissMessage: () => set({ lastMessage: null }),
 
-      registerBrewAttempt: (tier) => {
+      registerBrewAttempt: (tier, recipeId) => {
         const state = get()
         const level = getLevel(state.levelId)
 
@@ -81,6 +84,11 @@ export const useGameProgressStore = create<GameProgressState>()(
 
         // --- acertou (total ou parcial): ganha estrelas e passa pro próximo cliente ---
         const earnedStars = tier === "success" ? 50 : 25
+        const currentUses = state.recipeUses ?? {}
+        const recipeUses =
+          tier === "success" && recipeId
+            ? { ...currentUses, [recipeId]: (currentUses[recipeId] ?? 0) + 1 }
+            : currentUses
         const stars = state.stars + earnedStars
         const totalStars = state.totalStars + earnedStars
         const nextClientIndex =
@@ -119,6 +127,7 @@ export const useGameProgressStore = create<GameProgressState>()(
         set({
           stars,
           totalStars,
+          recipeUses,
           client: { clientIndex: nextClientIndex, attempts: 0 },
         })
       },

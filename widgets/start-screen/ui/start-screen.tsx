@@ -2,6 +2,7 @@
 
 import { Button, ItemImage } from "@/shared/ui"
 import { SoundToggle } from "@/features"
+import { IMAGES } from "@/shared/config"
 import { BookHeart } from "lucide-react"
 
 type Props = {
@@ -23,11 +24,11 @@ export function StartScreen({
         Verde Remédio: Saberes Tradicionais
       </h1>
 
-      {/* Cena da tela inicial — reservada. Basta colocar a arte em
-          /public/images/scenes/start-screen.png que ela aparece aqui,
-          substituindo o ícone de fallback. */}
+      {/* Cena da tela inicial — arte pendente. Registre-a em
+          shared/config/images.ts (SCENE_IMAGES.START_SCREEN) e ela aparece
+          aqui, substituindo o ícone de fallback. */}
       <ItemImage
-        src="/images/scenes/start-screen.png"
+        src={IMAGES.scenes.START_SCREEN}
         alt="Cena inicial do jogo"
         icon={<BookHeart className="size-16 text-amber-900/40" />}
         className="bg-parchment aspect-video w-full max-w-3xl rounded-xl ring-1 ring-black/10"

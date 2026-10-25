@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { findRecipeMatch } from "./recipes.model"
+import { findRecipeMatch, isRecipeOverused, MAX_RECIPE_USES } from "./recipes.model"
 import { RECIPES } from "./recipes.constants"
 import { INSTRUMENTS_KEYS } from "@/entities/instruments"
 import { INGREDIENT_KEYS } from "@/entities/ingredient"
@@ -53,5 +53,30 @@ describe("findRecipeMatch", () => {
         INSTRUMENTS_KEYS.SUGAR
       )
     ).toBeNull()
+  })
+})
+
+describe("isRecipeOverused", () => {
+  const byId = (id: string) => RECIPES.find((r) => r.id === id)!
+  // 2 = chá de guiné, 3 = chá de jurubeba, 9 = cataplasma — todas p/ artrite
+  const arthritis = [byId("2"), byId("3"), byId("9")]
+
+  it("não recusa antes do limite", () => {
+    expect(isRecipeOverused(byId("2"), { "2": MAX_RECIPE_USES - 1 }, arthritis)).toBe(false)
+  })
+
+  it("recusa na 3ª vez quando existe outra receita disponível", () => {
+    expect(isRecipeOverused(byId("2"), { "2": MAX_RECIPE_USES }, arthritis)).toBe(true)
+  })
+
+  it("não recusa se não há alternativa (evita softlock)", () => {
+    expect(isRecipeOverused(byId("2"), { "2": 2 }, [byId("2")])).toBe(false)
+    expect(
+      isRecipeOverused(byId("2"), { "2": 2, "3": 2, "9": 2 }, arthritis)
+    ).toBe(false)
+  })
+
+  it("alternativa de outra condição não conta", () => {
+    expect(isRecipeOverused(byId("2"), { "2": 2 }, [byId("2"), byId("8")])).toBe(false)
   })
 })

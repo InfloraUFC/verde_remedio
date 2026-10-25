@@ -12,7 +12,7 @@ export function BaseIngredientShelf({ bases }: Props) {
         Bases
       </span>
 
-      <div className="flex max-h-115 flex-col items-center gap-3 overflow-y-auto p-3">
+      <div className="scroll-thin flex max-h-115 flex-col items-center gap-3 overflow-y-auto overscroll-contain p-3">
         {bases.map((base) => (
           <DraggableIngredient key={base.id} ingredient={base} />
         ))}

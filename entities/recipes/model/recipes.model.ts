@@ -42,6 +42,32 @@ export function findRecipeMatch(
   )
 }
 
+/** Quantas vezes a mesma receita pode ser feita; a próxima é recusada. */
+export const MAX_RECIPE_USES = 2
+
+/**
+ * A cliente "enjoa" da receita: na 3ª vez que o jogador tenta fazer a mesma
+ * receita (por nível), ela recusa e o jogador precisa escolher outra.
+ *
+ * Trava de segurança contra softlock: só recusa se ainda existir OUTRA
+ * receita liberada no nível que trate a mesma condição e ainda não tenha
+ * estourado o limite. Sem alternativa, a receita continua valendo.
+ */
+export function isRecipeOverused(
+  recipe: Recipe,
+  uses: Record<string, number>,
+  availableRecipes: Recipe[]
+): boolean {
+  if ((uses[recipe.id] ?? 0) < MAX_RECIPE_USES) return false
+
+  return availableRecipes.some(
+    (other) =>
+      other.id !== recipe.id &&
+      other.treatmentFor === recipe.treatmentFor &&
+      (uses[other.id] ?? 0) < MAX_RECIPE_USES
+  )
+}
+
 /**
  * Verifica se o instrumento solto é o mesmo usado por ALGUMA receita que
  * trata a condição informada — ou seja, "o modo de preparo tá certo pra

@@ -12,6 +12,11 @@ export type ClientDialogue = {
   success: string[]
   partial: string[]
   failure: string[]
+  /**
+   * Fala quando o jogador tenta preparar a MESMA receita pela 3ª vez.
+   * `{recipe}` é substituído pelo nome da poção.
+   */
+  repeated: string[]
 }
 
 export type Client = {

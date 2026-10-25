@@ -8,3 +8,4 @@ export * from './dialog';
 export * from './tabs';
 export * from './scroll-area';
 export * from './item-image';
+export * from './icons';

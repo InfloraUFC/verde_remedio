@@ -14,12 +14,15 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   ingredient: Ingredient
   rightSlot?: React.ReactNode
   labelClassName?: string
+  /** `sm` = versão compacta usada na barra de ingredientes do caldeirão */
+  size?: "md" | "sm"
 }
 
 export function IngredientCard({
   ingredient,
   rightSlot,
   labelClassName,
+  size = "md",
   ...props
 }: Props) {
   return (
@@ -27,6 +30,7 @@ export function IngredientCard({
       {...props}
       className={cn(
         "group flex flex-col items-center gap-1 rounded-lg p-1.5 transition-colors",
+        size === "sm" && "gap-0.5 p-0.5",
         props.className
       )}
     >
@@ -35,7 +39,10 @@ export function IngredientCard({
           src={ingredient.image}
           alt={ingredient.popularName}
           icon={FALLBACK_ICON[ingredient.kind]}
-          className="size-24 rounded-md bg-white/70 shadow-inner ring-1 ring-black/10 text-emerald-800 group-hover:ring-emerald-500/60"
+          className={cn(
+            "rounded-md bg-white/70 shadow-inner ring-1 ring-black/10 text-emerald-800 group-hover:ring-emerald-500/60",
+            size === "sm" ? "size-11" : "size-24"
+          )}
         />
         {rightSlot && (
           <div className="absolute -top-1.5 -right-1.5">{rightSlot}</div>
@@ -45,6 +52,7 @@ export function IngredientCard({
       <span
         className={cn(
           "max-w-24 truncate text-center text-[11px] font-medium text-amber-50 drop-shadow-sm",
+          size === "sm" && "max-w-12 text-[10px]",
           labelClassName
         )}
       >

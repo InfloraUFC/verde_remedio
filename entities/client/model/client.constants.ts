@@ -1,3 +1,4 @@
+import { getCharacterImage } from "@/shared/config"
 import { TREATMENT_CONSTANT } from "@/entities/recipes/model/recipes.types"
 import { Client } from "./client.types"
 
@@ -8,7 +9,7 @@ export const CLIENTS: Client[] = [
     age: 67,
     description:
       "Dona de casa, amigável, inteligente, mas teimosa. Gosta de pássaros, crochê e dança.",
-    portrait: "/images/clients/luciana.png",
+    portrait: getCharacterImage("luciana"),
     conditions: [
       {
         name: "Artrite",
@@ -26,6 +27,9 @@ export const CLIENTS: Client[] = [
       success: ["Ah, que alívio! Já sinto a dor passando, muito obrigada!"],
       partial: ["Melhorou um pouco, mas ainda tá doendo... tem algo melhor?"],
       failure: ["Isso não fez nada pela minha dor, minha filha."],
+      repeated: [
+        "Chega de {recipe}, meu filho, não aguento mais!",
+      ],
     },
   },
   {
@@ -34,7 +38,7 @@ export const CLIENTS: Client[] = [
     age: 47,
     description:
       "Artista viajante, gentil, apaixonado por gatos, com fobia de minhocas.",
-    portrait: "/images/clients/luiz.png",
+    portrait: getCharacterImage("luiz"),
     conditions: [
       {
         name: "Bronquite crônica",
@@ -51,6 +55,9 @@ export const CLIENTS: Client[] = [
       success: ["Ufa, já respiro melhor! Você tem talento pra isso."],
       partial: ["Ainda sinto o peito pesado, mas já ajudou um pouco."],
       failure: ["*tosse forte* Isso não resolveu nada..."],
+      repeated: [
+        "*tosse* Chega de {recipe}, não aguento mais esse gosto! Me dê outra coisa.",
+      ],
     },
   },
   {
@@ -59,7 +66,7 @@ export const CLIENTS: Client[] = [
     age: 17,
     description:
       "Estudante, ansiosa com vestibular, não gosta de ciências naturais.",
-    portrait: "/images/clients/amanda.png",
+    portrait: getCharacterImage("amanda"),
     conditions: [
       {
         name: "Gastrite",
@@ -77,6 +84,9 @@ export const CLIENTS: Client[] = [
       success: ["Nossa, parou de queimar! Obrigada, você me salvou."],
       partial: ["Melhorou um pouquinho, mas ainda sinto a azia."],
       failure: ["Continua queimando igual... isso não funcionou."],
+      repeated: [
+        "Ai, de novo {recipe}? Chega, não aguento mais! Tem outra coisa?",
+      ],
     },
   },
 ]

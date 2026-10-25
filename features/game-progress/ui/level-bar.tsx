@@ -12,19 +12,19 @@ export function LevelBar() {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="grid size-6 place-items-center rounded-full bg-emerald-700 text-xs font-bold text-white">
+      <span className="grid size-6 place-items-center rounded-full bg-brand-green text-xs font-bold text-white">
         {levelId}
       </span>
 
-      <div className="h-3 w-40 overflow-hidden rounded-full bg-emerald-950/15 ring-1 ring-black/10">
+      <div className="h-3 w-40 overflow-hidden rounded-full bg-brand-green/15 ring-1 ring-black/10">
         <div
-          className="h-full rounded-full bg-emerald-500 transition-all"
+          className="h-full rounded-full bg-brand-green-light transition-all"
           style={{ width: `${progress}%` }}
         />
       </div>
 
       {!isLastLevel(levelId) && (
-        <span className="grid size-6 place-items-center rounded-full bg-emerald-700/40 text-xs font-bold text-white">
+        <span className="grid size-6 place-items-center rounded-full bg-brand-green/40 text-xs font-bold text-white">
           {levelId + 1}
         </span>
       )}

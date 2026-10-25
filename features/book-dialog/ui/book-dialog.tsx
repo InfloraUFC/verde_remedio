@@ -1,9 +1,9 @@
 "use client"
 
-import { BookOpen, Leaf } from "lucide-react"
+import { Leaf } from "lucide-react"
 import {
   Badge,
-  Button,
+  BookIcon,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -15,8 +15,6 @@ import {
   TabsTrigger,
 } from "@/shared/ui"
 import {
-  getIngredientByKey,
-  getInstrumentByKey,
   Ingredient,
   INGREDIENT_KINDS,
   INGREDIENTS,
@@ -42,9 +40,15 @@ export function BookDialog() {
   return (
     <Dialog onOpenChange={(open) => open && markBookOpened()}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="icon" title="Livro de plantas e receitas">
-          <BookOpen className="size-5" />
-        </Button>
+        <button
+          title="Abrir o livro de plantas e receitas"
+          className="animate-book-glow flex flex-col items-center gap-1 rounded-2xl bg-brand-brown px-5 py-3 text-amber-50 shadow-lg ring-2 ring-amber-200/70 transition hover:-translate-y-0.5 hover:ring-amber-100"
+        >
+          <BookIcon className="size-10" />
+          <span className="font-serif text-sm font-bold tracking-wide">
+            Livro
+          </span>
+        </button>
       </DialogTrigger>
 
       <DialogContent className="h-[80vh] w-full max-w-6xl! border-none bg-amber-600 p-0 shadow-none">
@@ -111,13 +115,6 @@ function renderPlantPage(plant: Ingredient) {
 }
 
 function renderRecipePage(recipe: Recipe) {
-  const instrument = getInstrumentByKey(recipe.type)
-
-  const ingredientNames = recipe.ingredients
-    .map((key) => getIngredientByKey(key)?.popularName)
-    .filter(Boolean)
-    .join(" + ")
-
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-start justify-between gap-2">
@@ -128,10 +125,6 @@ function renderRecipePage(recipe: Recipe) {
       </div>
 
       <p className="text-sm text-amber-900/80">{recipe.description}</p>
-
-      <p className="text-xs font-medium text-amber-900/70 capitalize">
-        {instrument.type} · {ingredientNames} + {instrument.name}
-      </p>
 
       <div className="flex flex-wrap gap-1">
         {recipe.properties.map((property) => (

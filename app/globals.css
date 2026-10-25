@@ -7,8 +7,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  /* Fontes do design: Gamja Flower (texto) e Montaser Arabic (títulos) */
+  --font-sans: var(--font-gamja), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Montaser Arabic", var(--font-gamja), Georgia, serif;
   --font-mono: var(--font-geist-mono);
+  --color-brand-brown: var(--brand-brown);
+  --color-brand-green: var(--brand-green);
+  --color-brand-green-light: var(--brand-green-light);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,14 +53,19 @@
 }
 
 :root {
+  /* Paleta do documento de design */
+  --brand-brown: #704535;
+  --brand-green: #1c621f;
+  --brand-green-light: #4ab43a; /* barra de XP */
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: var(--brand-green);
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
@@ -132,7 +142,7 @@
 
 @layer utilities {
   .bg-wood-panel {
-    background-color: #8a5a30;
+    background-color: #704535;
     background-image:
       repeating-linear-gradient(
         90deg,
@@ -141,7 +151,7 @@
         transparent 2px,
         transparent 64px
       ),
-      linear-gradient(180deg, #a06c3a 0%, #7a4c26 100%);
+      linear-gradient(180deg, #80503d 0%, #5f3a2c 100%);
   }
 
   .bg-parchment {
@@ -149,6 +159,12 @@
     background-image:
       radial-gradient(circle at 15% 20%, rgba(139, 94, 43, 0.08), transparent 40%),
       radial-gradient(circle at 85% 75%, rgba(139, 94, 43, 0.08), transparent 40%);
+  }
+
+  /* scrollbar fina e discreta nas prateleiras de madeira */
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(243, 230, 200, 0.55) transparent;
   }
 
   .shelf-plank {
@@ -163,7 +179,7 @@
   }
 
   .bg-brick-frame {
-    background-color: #9c4a2e;
+    background-color: #704535;
     background-image:
       repeating-linear-gradient(
         0deg,
@@ -179,7 +195,7 @@
         transparent 3px,
         transparent 92px
       ),
-      linear-gradient(180deg, #b5613c 0%, #92462a 100%);
+      linear-gradient(180deg, #84523f 0%, #5c392b 100%);
   }
 }
 
@@ -197,4 +213,33 @@
 
 .animate-cauldron-bubble {
   animation: cauldron-bubble 2.6s ease-in-out infinite;
+}
+/* Montaser Arabic: coloque o arquivo em public/fonts/montaser-arabic.woff2.
+   Enquanto não existir, o navegador usa a fonte de reserva (Gamja/Georgia). */
+@font-face {
+  font-family: "Montaser Arabic";
+  src: local("Montaser Arabic"), url("/fonts/montaser-arabic.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* brilho suave no botão do livro, pra chamar atenção sem atrapalhar */
+@keyframes book-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(253, 230, 138, 0);
+  }
+  50% {
+    box-shadow: 0 0 14px 3px rgba(253, 230, 138, 0.55);
+  }
+}
+
+.animate-book-glow {
+  animation: book-glow 2.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-book-glow,
+  .animate-cauldron-bubble {
+    animation: none;
+  }
 }
