@@ -11,7 +11,7 @@ import { CreditsScreen } from "@/widgets/credits-screen"
 import { PotionLab } from "@/widgets/potion-lab"
 
 const PRE_GAME_FORM_URL = "https://forms.gle/p5CVgb9uhd4f1Bax6"
-const POST_GAME_FORM_URL = "https://forms.gle/p5CVgb9uhd4f1Bax6"
+const POST_GAME_FORM_URL = "https://forms.gle/goBVk96WBUSJnYv39"
 
 type Screen = "start" | "pre-form" | "credits" | "game"
 
