@@ -2,7 +2,7 @@
 
 import { Button, ItemImage } from "@/shared/ui"
 import { SoundToggle } from "@/features"
-import { IMAGES } from "@/shared/config"
+import { CHARACTER_IMAGES, IMAGES } from "@/shared/config"
 import { BookHeart } from "lucide-react"
 
 type Props = {
@@ -25,7 +25,8 @@ export function StartScreen({
       </h1>
 
       <ItemImage
-        src={IMAGES.scenes.START_SCREEN}
+        // src={IMAGES.scenes.START_SCREEN}
+        src={CHARACTER_IMAGES.protagonist.idle}
         alt="Cena inicial do jogo"
         icon={<BookHeart className="size-16 text-amber-900/40" />}
         className="bg-parchment aspect-video w-full max-w-3xl rounded-xl ring-1 ring-black/10"

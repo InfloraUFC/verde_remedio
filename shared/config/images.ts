@@ -46,7 +46,7 @@ export const PLANT_IMAGES = {
  * descomentar a linha abaixo.
  */
 export const BASE_IMAGES = {
-  // WATER: `${ROOT}/bases/water.webp`,
+  WATER: `${ROOT}/bases/water.webp`,
   OIL: `${ROOT}/bases/oil.webp`,
   ALCOHOL: `${ROOT}/bases/alcohol.webp`,
 } as const

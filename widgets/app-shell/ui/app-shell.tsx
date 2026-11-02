@@ -10,9 +10,8 @@ import { StartScreen } from "@/widgets/start-screen"
 import { CreditsScreen } from "@/widgets/credits-screen"
 import { PotionLab } from "@/widgets/potion-lab"
 
-// TODO: trocar pelos links reais do Google Forms quando estiverem prontos.
-const PRE_GAME_FORM_URL = "https://forms.gle/SEU-LINK-AQUI-FORMULARIO-INICIAL"
-const POST_GAME_FORM_URL = "https://forms.gle/SEU-LINK-AQUI-AUTOAVALIACAO"
+const PRE_GAME_FORM_URL = "https://forms.gle/p5CVgb9uhd4f1Bax6"
+const POST_GAME_FORM_URL = "https://forms.gle/p5CVgb9uhd4f1Bax6"
 
 type Screen = "start" | "pre-form" | "credits" | "game"
 
