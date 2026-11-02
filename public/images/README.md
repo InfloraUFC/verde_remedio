@@ -1,21 +1,18 @@
-# Assets de imagens
+# Imagens do jogo
 
-Coloque os PNGs finais aqui — a UI já está preparada para exibi-los automaticamente,
-sem precisar mexer em código. Enquanto o arquivo não existir, um ícone genérico
-aparece no lugar.
+**Nunca escreva `/images/...` direto no código.** Todos os caminhos ficam em
+`shared/config/images.ts` (registro global). Para adicionar ou trocar uma arte:
 
-## Plantas e bases (`/images/ingredients/`)
-Nome do arquivo = campo `image` de cada item em `entities/ingredient/model/ingredient.constants.ts`.
-Ex: `angico.png`, `guine.png`, `water.png`, `oil.png`, `alcohol.png`.
+1. Salve o arquivo na pasta do grupo, em **minúsculas, sem acento/espaço**
+   (ex.: `casca-de-anta.webp`). Recomendado: WebP, até ~700px no maior lado.
+2. Registre o caminho em `shared/config/images.ts`.
+3. Rode `pnpm test:run` — o teste valida que tudo que está registrado existe e
+   que nenhum arquivo ficou órfão.
 
-## Instrumentos (`/images/instruments/`)
-Nome do arquivo = campo `img` de cada instrumento em `entities/instruments/model/instruments.constants.ts`.
-Ex: `sugar.png`, `tea.png`, `cataplasm.png`, `bottle.png`, `powder.png`.
-
-## Clientes (`/images/clients/`)
-Nome do arquivo = campo `portrait` de cada cliente em `entities/client/model/client.constants.ts`.
-Ex: `luciana.png`, `luiz.png`, `amanda.png`.
-
-## Cenas (`/images/scenes/`)
-- `start-screen.png` — ilustração da tela inicial (igual ao modelo do Canva
-  que você mandou: prateleira, personagem lendo, porta, bancada, plantas).
+| Pasta | Conteúdo |
+|---|---|
+| `plants/` | 15 plantas |
+| `bases/` | óleo, álcool (**água pendente** → `water.webp`) |
+| `utensils/` | chaleira, pilão, açúcar, garrafa, cataplasma |
+| `characters/<nome>/` | sprites: `idle`, `talking-1`, `talking-2`, `angry` (+ `happy`) |
+| `scenes/` | (**pendente**) `start-screen.webp` |

@@ -10,6 +10,7 @@ export function RemovableIngredientCard({ ingredient }: { ingredient: Ingredient
   return (
     <IngredientCard
       ingredient={ingredient}
+      size="sm"
       labelClassName="text-amber-950"
       rightSlot={
         <button

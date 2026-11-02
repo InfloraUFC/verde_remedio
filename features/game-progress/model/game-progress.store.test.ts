@@ -71,4 +71,22 @@ describe("useGameProgressStore", () => {
 
     expect(useGameProgressStore.getState().totalStars).toBe(110)
   })
+
+  it("conta quantas vezes cada receita foi feita com sucesso no nível", () => {
+    const { registerBrewAttempt } = useGameProgressStore.getState()
+    registerBrewAttempt("success", "2")
+    expect(useGameProgressStore.getState().recipeUses).toEqual({ "2": 1 })
+  })
+
+  it("acerto parcial não conta como uso de receita", () => {
+    useGameProgressStore.getState().registerBrewAttempt("partial", "2")
+    expect(useGameProgressStore.getState().recipeUses).toEqual({})
+  })
+
+  it("subir de nível zera a contagem de receitas", () => {
+    const { registerBrewAttempt } = useGameProgressStore.getState()
+    registerBrewAttempt("success", "2")
+    registerBrewAttempt("success", "3") // 100/100 -> nível 2
+    expect(useGameProgressStore.getState().recipeUses).toEqual({})
+  })
 })

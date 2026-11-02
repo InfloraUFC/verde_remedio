@@ -29,7 +29,7 @@ export function Shelf({
         className
       )}
     >
-      <span className="pt-3 text-center text-[11px] font-bold tracking-wider text-amber-100/90 uppercase drop-shadow-sm">
+      <span className="pt-3 text-center text-[13px] font-bold tracking-wider text-amber-100/90 uppercase drop-shadow-sm">
         {title}
       </span>
 

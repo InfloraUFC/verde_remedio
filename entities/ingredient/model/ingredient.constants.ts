@@ -1,3 +1,4 @@
+import { getIngredientImage } from "@/shared/config"
 import { Ingredient, INGREDIENT_KEYS, INGREDIENT_KINDS } from "./ingredient.types"
 
 export const INGREDIENTS: Ingredient[] = [
@@ -5,7 +6,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: 'base-1',
     key: INGREDIENT_KEYS.WATER,
-    image: '/images/ingredients/water.png',
+    image: getIngredientImage(INGREDIENT_KEYS.WATER),
     kind: INGREDIENT_KINDS.WATER,
     popularName: 'Água',
     properties: ['solvente', 'base aquosa'],
@@ -14,7 +15,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: 'base-2',
     key: INGREDIENT_KEYS.OIL,
-    image: '/images/ingredients/oil.png',
+    image: getIngredientImage(INGREDIENT_KEYS.OIL),
     kind: INGREDIENT_KINDS.OIL,
     popularName: 'Óleo',
     properties: ['veículo lipídico', 'potencializador de princípios ativos'],
@@ -23,7 +24,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: 'base-3',
     key: INGREDIENT_KEYS.ALCOHOL,
-    image: '/images/ingredients/alcohol.png',
+    image: getIngredientImage(INGREDIENT_KEYS.ALCOHOL),
     kind: INGREDIENT_KINDS.ALCOHOL,
     popularName: 'Álcool',
     properties: ['conservante', 'extrator alcoólico'],
@@ -34,7 +35,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '1',
     key: INGREDIENT_KEYS.ANGICO,
-    image: '/images/ingredients/angico.png',
+    image: getIngredientImage(INGREDIENT_KEYS.ANGICO),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Angico',
     scientificName: 'Anadenanthera colubrina (Vell.) Brenan',
@@ -46,7 +47,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '2',
     key: INGREDIENT_KEYS.GUINE,
-    image: '/images/ingredients/guine.png',
+    image: getIngredientImage(INGREDIENT_KEYS.GUINE),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Guiné (Mucura-caá)',
     scientificName: 'Petiveria alliacea L.',
@@ -58,7 +59,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '3',
     key: INGREDIENT_KEYS.JURUBEBA,
-    image: '/images/ingredients/jurubeba.png',
+    image: getIngredientImage(INGREDIENT_KEYS.JURUBEBA),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Jurubeba',
     scientificName: 'Solanum paniculatum',
@@ -70,7 +71,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '4',
     key: INGREDIENT_KEYS.JATOBA,
-    image: '/images/ingredients/jatoba.png',
+    image: getIngredientImage(INGREDIENT_KEYS.JATOBA),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Jatobá',
     scientificName: 'Hymenaea courbaril',
@@ -82,7 +83,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '5',
     key: INGREDIENT_KEYS.HORTELA,
-    image: '/images/ingredients/hortela.png',
+    image: getIngredientImage(INGREDIENT_KEYS.HORTELA),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Hortelã',
     scientificName: 'Mentha sp.',
@@ -93,7 +94,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '6',
     key: INGREDIENT_KEYS.ROMA,
-    image: '/images/ingredients/roma.png',
+    image: getIngredientImage(INGREDIENT_KEYS.ROMA),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Romã',
     scientificName: 'Punica granatum L.',
@@ -104,7 +105,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '7',
     key: INGREDIENT_KEYS.ASSA_PEIXE,
-    image: '/images/ingredients/assa-peixe.png',
+    image: getIngredientImage(INGREDIENT_KEYS.ASSA_PEIXE),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Assa-peixe',
     scientificName: 'Vernonanthura brasiliana (L.) H.Rob',
@@ -115,7 +116,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '8',
     key: INGREDIENT_KEYS.MASTRUCO,
-    image: '/images/ingredients/mastruco.png',
+    image: getIngredientImage(INGREDIENT_KEYS.MASTRUCO),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Erva-de-santa-maria (Mastruço)',
     scientificName: 'Dysphania ambrosioides (L.) Mosyakin & Clemants',
@@ -133,7 +134,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '9',
     key: INGREDIENT_KEYS.CAJUEIRO,
-    image: '/images/ingredients/cajueiro.png',
+    image: getIngredientImage(INGREDIENT_KEYS.CAJUEIRO),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Cajueiro',
     scientificName: 'Anacardium occidentale L.',
@@ -145,7 +146,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '10',
     key: INGREDIENT_KEYS.AROEIRA,
-    image: '/images/ingredients/aroeira.png',
+    image: getIngredientImage(INGREDIENT_KEYS.AROEIRA),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Aroeira-mansa',
     scientificName: 'Schinus terebinthifolius',
@@ -156,7 +157,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '11',
     key: INGREDIENT_KEYS.BARBATIMAO,
-    image: '/images/ingredients/barbatimao.png',
+    image: getIngredientImage(INGREDIENT_KEYS.BARBATIMAO),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Barbatimão',
     scientificName: 'Abarema cochliacarpos',
@@ -168,7 +169,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '12',
     key: INGREDIENT_KEYS.CASCA_DE_ANTA,
-    image: '/images/ingredients/casca-de-anta.png',
+    image: getIngredientImage(INGREDIENT_KEYS.CASCA_DE_ANTA),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Casca-de-anta',
     scientificName: 'Drimys brasiliensis Miers',
@@ -179,7 +180,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '13',
     key: INGREDIENT_KEYS.ACAFRAO_DA_TERRA,
-    image: '/images/ingredients/acafrao-da-terra.png',
+    image: getIngredientImage(INGREDIENT_KEYS.ACAFRAO_DA_TERRA),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Açafrão-da-terra (Açafroa)',
     scientificName: 'Curcuma longa L.',
@@ -191,7 +192,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '14',
     key: INGREDIENT_KEYS.QUINA_DO_CERRADO,
-    image: '/images/ingredients/quina-do-cerrado.png',
+    image: getIngredientImage(INGREDIENT_KEYS.QUINA_DO_CERRADO),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Quina-do-cerrado',
     scientificName: 'Strychnos pseudoquina',
@@ -203,7 +204,7 @@ export const INGREDIENTS: Ingredient[] = [
   {
     id: '15',
     key: INGREDIENT_KEYS.GENGIBRE,
-    image: '/images/ingredients/gengibre.png',
+    image: getIngredientImage(INGREDIENT_KEYS.GENGIBRE),
     kind: INGREDIENT_KINDS.PLANT,
     popularName: 'Gengibre',
     scientificName: 'Zingiber officinale',

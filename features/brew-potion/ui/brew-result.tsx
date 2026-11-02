@@ -1,12 +1,16 @@
 "use client"
 
-import { CheckCircle2, Sparkles, XCircle } from "lucide-react"
+import { CheckCircle2, MessageCircleWarning, Sparkles, XCircle } from "lucide-react"
 import { TREATMENT_LABELS } from "@/entities"
 import { useGameProgressStore } from "@/features/game-progress"
 import { useBrewStore } from "../model"
 
 function pickLine(lines: string[]) {
   return lines[Math.floor(Math.random() * lines.length)] ?? ""
+}
+
+function lowerFirst(text: string) {
+  return text.charAt(0).toLowerCase() + text.slice(1)
 }
 
 export function BrewResult() {
@@ -43,6 +47,20 @@ export function BrewResult() {
           <span>
             &ldquo;{pickLine(result.client.dialogue.failure)}&rdquo; — perdeu
             1 vida
+          </span>
+        </div>
+      )}
+
+      {result.status === "repeated" && (
+        <div className="flex max-w-xs items-center gap-2 rounded-lg bg-orange-100 px-3 py-2 text-sm text-orange-900 ring-1 ring-orange-900/10">
+          <MessageCircleWarning className="size-4 shrink-0" />
+          <span>
+            &ldquo;
+            {pickLine(result.client.dialogue.repeated).replace(
+              "{recipe}",
+              lowerFirst(result.recipe.result.name)
+            )}
+            &rdquo; — tente outra receita
           </span>
         </div>
       )}

@@ -1,7 +1,17 @@
 "use client"
 
 import React from "react"
-import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from "@dnd-kit/core"
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core"
 import {
   BookDialog,
   BrewButton,
@@ -11,6 +21,8 @@ import {
   IngredientList,
   LevelBar,
   SoundToggle,
+  TutorialButton,
+  TutorialDialog,
   useCauldronStore,
   useGameProgressStore,
   useHydrateGameProgress,
@@ -51,6 +63,16 @@ export function PotionLab({ onShowCredits }: Props = {}) {
 
   const [activeDrag, setActiveDrag] = React.useState<DragData | null>(null)
 
+  // Sensores separados por tipo de entrada:
+  //  - mouse: só começa a arrastar após mover 6px (assim o duplo clique funciona);
+  //  - toque: arrasta com long-press (180ms), então rolar as prateleiras com o
+  //    dedo continua funcionando (antes o toque era sempre capturado pelo item).
+  const sensors = useSensors(
+    useSensor(MouseSensor, { activationConstraint: { distance: 6 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 180, tolerance: 8 } }),
+    useSensor(KeyboardSensor)
+  )
+
   const level = getLevel(levelId)
   const unlockedPlantKeys = new Set(getUnlockedPlantKeys(level))
   const unlockedInstrumentKeys = new Set(getUnlockedInstrumentKeys(level))
@@ -83,10 +105,14 @@ export function PotionLab({ onShowCredits }: Props = {}) {
   }
 
   return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <DndContext
+      sensors={sensors}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
       <div className="bg-parchment flex min-h-dvh flex-col gap-3 p-4">
         <header className="flex flex-wrap items-center justify-between gap-3">
-          <h1 className="font-serif text-lg font-semibold text-amber-950">
+          <h1 className="font-serif text-xl font-bold text-brand-brown">
             Verde Remédio
           </h1>
 
@@ -96,7 +122,7 @@ export function PotionLab({ onShowCredits }: Props = {}) {
           </div>
 
           <div className="flex items-center gap-2">
-            <BookDialog />
+            <TutorialButton />
             {onShowCredits && (
               <button
                 onClick={onShowCredits}
@@ -122,17 +148,27 @@ export function PotionLab({ onShowCredits }: Props = {}) {
             <ClientScene />
 
             <div className="flex flex-col items-center gap-4">
-              <Cauldron />
+              {/* O livro fica ao lado do caldeirão (coluna da direita do grid,
+                  o caldeirão fica centralizado pela coluna `1fr` vazia). */}
+              <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center">
+                <div />
+                <Cauldron />
+                <div className="flex justify-start pl-6 sm:pl-10">
+                  <BookDialog />
+                </div>
+              </div>
               <IngredientList />
               <BrewButton />
               <BrewResult />
             </div>
           </div>
 
-          {/* Coluna direita: instrumentos, arrastáveis para o caldeirão */}
+          {/* Coluna direita: utensílios, arrastáveis para o caldeirão */}
           <InstrumentShelf instruments={instruments} />
         </div>
       </div>
+
+      <TutorialDialog />
 
       <DragOverlay>
         {activeDrag?.kind === "ingredient" && (

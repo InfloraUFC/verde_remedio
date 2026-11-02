@@ -2,8 +2,13 @@
 
 import { FlaskConical } from "lucide-react"
 import { Button } from "@/shared/ui"
-import { CLIENTS, findRecipeMatch, treatsCondition } from "@/entities"
-import { getLevel } from "@/entities/level"
+import {
+  CLIENTS,
+  findRecipeMatch,
+  isRecipeOverused,
+  treatsCondition,
+} from "@/entities"
+import { getLevel, getUnlockedRecipes } from "@/entities/level"
 import { useCauldronStore } from "@/features/drop-cauldron"
 import { useGameProgressStore } from "@/features/game-progress"
 import { useBrewStore } from "../model"
@@ -17,6 +22,7 @@ export function BrewButton() {
   const levelId = useGameProgressStore((s) => s.levelId)
   const clientIndex = useGameProgressStore((s) => s.client.clientIndex)
   const attempts = useGameProgressStore((s) => s.client.attempts)
+  const recipeUses = useGameProgressStore((s) => s.recipeUses)
   const registerBrewAttempt = useGameProgressStore((s) => s.registerBrewAttempt)
 
   const disabled = ingredients.length === 0 || !instrument
@@ -37,8 +43,15 @@ export function BrewButton() {
 
     // acerto total: receita exata E que trata a condição desse cliente
     if (isExactForClient && exactMatch) {
+      // a cliente enjoou: 3ª vez da mesma receita é recusada (sem perder vida)
+      if (isRecipeOverused(exactMatch, recipeUses ?? {}, getUnlockedRecipes(level))) {
+        setResult({ status: "repeated", recipe: exactMatch, client })
+        resetCauldron()
+        return
+      }
+
       setResult({ status: "success", recipe: exactMatch, client })
-      registerBrewAttempt("success")
+      registerBrewAttempt("success", exactMatch.id)
       resetCauldron()
       return
     }
@@ -66,7 +79,7 @@ export function BrewButton() {
       disabled={disabled}
       title={
         disabled
-          ? "Solte ao menos 1 ingrediente e 1 instrumento no caldeirão"
+          ? "Solte ao menos 1 ingrediente e 1 utensílio no caldeirão"
           : "Preparar poção com o conteúdo do caldeirão"
       }
       className="gap-2"

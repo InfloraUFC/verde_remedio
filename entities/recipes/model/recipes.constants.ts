@@ -182,9 +182,9 @@ export const RECIPES: Recipe[] = [
     instruments: [INSTRUMENTS_KEYS.CATAPLASM],
     ingredients: [INGREDIENT_KEYS.ACAFRAO_DA_TERRA, INGREDIENT_KEYS.GENGIBRE, INGREDIENT_KEYS.WATER],
     description:
-      'Cataplasma anti-inflamatória para dores articulares, feita com pó de cúrcuma e gengibre.',
+      'Cataplasma anti-inflamatória para dores articulares, feita com pó de açafrão-da-terra e gengibre.',
     preparation:
-      'Misture o pó de cúrcuma e o gengibre em partes iguais. Adicione água aos poucos até formar uma pasta consistente. Coloque a pasta em uma gaze ou algodão e aplique na área afetada pela dor.',
+      'Misture o pó de açafrão-da-terra e o gengibre em partes iguais. Adicione água aos poucos até formar uma pasta consistente. Coloque a pasta em uma gaze ou algodão e aplique na área afetada pela dor.',
     clients: [luciana],
   },
   {

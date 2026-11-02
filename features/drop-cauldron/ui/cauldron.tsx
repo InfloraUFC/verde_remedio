@@ -1,6 +1,7 @@
 "use client"
 
 import { useDroppable } from "@dnd-kit/core"
+import { CauldronIcon } from "@/shared/ui"
 import { useCauldronStore } from "../model"
 import { cn } from "@/lib/utils"
 
@@ -9,8 +10,6 @@ export function Cauldron() {
     id: "cauldron",
   })
 
-  const ingredients = useCauldronStore((s) => s.ingredients)
-  const limit = useCauldronStore((s) => s.limit)
   const isCauldronFull = useCauldronStore((s) => s.isCauldronFull)
 
   const wouldOverflow = isOver && isCauldronFull()
@@ -37,9 +36,8 @@ export function Cauldron() {
         >
           <div className="absolute inset-3 rounded-[50%/45%] ring-2 ring-white/10" />
 
-          <span className="text-sm font-medium text-emerald-100/70">
-            {ingredients.length}/{limit}
-          </span>
+          {/* ícone decorativo: indica onde soltar os itens */}
+          <CauldronIcon className="size-16 text-emerald-100/25" />
         </div>
       </div>
 
