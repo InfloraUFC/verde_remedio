@@ -17,6 +17,7 @@ const CREDITS: { name: string; role: string }[] = [
   { name: "Gabriel Nobrega Maia", role: "Designer (personagens)" },
   { name: "Stefany dos Santos Oliveira Lima", role: "Designer (plantas)" },
   { name: "Rylle Alexandre Ribeiro Alves da Silva", role: "Designer (plantas)" },
+  { name: "Aleicha Evena Albuquerque de Sá", role: "Designer (plantas e equipamentos)" },
   { name: "Selma Freire de Brito", role: "Professora orientadora" },
 ]
 

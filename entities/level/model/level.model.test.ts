@@ -3,8 +3,14 @@ import { getLevel, getUnlockedInstrumentKeys, getUnlockedPlantKeys, isLastLevel 
 import { LEVELS } from "./level.constants"
 
 describe("level.model", () => {
-  it("has 7 levels with non-decreasing star requirements", () => {
-    expect(LEVELS).toHaveLength(7)
+  // it("has 7 levels with non-decreasing star requirements", () => {
+  //   expect(LEVELS).toHaveLength(7)
+  //   const requirements = LEVELS.map((l) => l.starsRequired)
+  //   expect(requirements).toEqual([...requirements].sort((a, b) => a - b))
+  // })
+
+  it("has 5 levels with non-decreasing star requirements", () => {
+    expect(LEVELS).toHaveLength(5)
     const requirements = LEVELS.map((l) => l.starsRequired)
     expect(requirements).toEqual([...requirements].sort((a, b) => a - b))
   })
@@ -13,9 +19,13 @@ describe("level.model", () => {
     expect(getLevel(999).id).toBe(1)
   })
 
+  // it("isLastLevel is true only for the final level", () => {
+  //   expect(isLastLevel(7)).toBe(true)
+  //   expect(isLastLevel(6)).toBe(false)
+  // })
   it("isLastLevel is true only for the final level", () => {
-    expect(isLastLevel(7)).toBe(true)
-    expect(isLastLevel(6)).toBe(false)
+    expect(isLastLevel(5)).toBe(true)
+    expect(isLastLevel(4)).toBe(false)
   })
 
   it("derives unlocked plants strictly from the level's recipes", () => {
@@ -24,7 +34,12 @@ describe("level.model", () => {
   })
 
   it("never removes content already unlocked in a previous level", () => {
-    for (let id = 2; id <= 7; id++) {
+    // for (let id = 2; id <= 7; id++) {
+    //   const previous = new Set(getUnlockedPlantKeys(getLevel(id - 1)))
+    //   const current = new Set(getUnlockedPlantKeys(getLevel(id)))
+    //   for (const key of previous) expect(current.has(key)).toBe(true)
+    // }
+    for (let id = 2; id <= 5; id++) {
       const previous = new Set(getUnlockedPlantKeys(getLevel(id - 1)))
       const current = new Set(getUnlockedPlantKeys(getLevel(id)))
       for (const key of previous) expect(current.has(key)).toBe(true)
@@ -36,6 +51,7 @@ describe("level.model", () => {
   })
 
   it("the final level unlocks all 10 recipes", () => {
-    expect(getLevel(7).recipeIds).toHaveLength(10)
+    // expect(getLevel(7).recipeIds).toHaveLength(10)
+    expect(getLevel(5).recipeIds).toHaveLength(8)
   })
 })

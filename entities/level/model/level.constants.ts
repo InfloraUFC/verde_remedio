@@ -13,54 +13,92 @@ import { LevelConfig } from "./level.types"
  * instrumentos liberados NÃO são uma lista separada: são derivados destas
  * receitas em `level.model.ts`, pra nunca ficar inconsistente.
  */
+// export const LEVELS: LevelConfig[] = [
+//   {
+//     id: 1,
+//     starsRequired: 100,
+//     lives: 5,
+//     clientIds: ["1"], // Luciana
+//     recipeIds: ["2", "3"], // Chá de Guiné, Chá de Jurubeba
+//   },
+//   {
+//     id: 2,
+//     starsRequired: 150,
+//     lives: 5,
+//     clientIds: ["1"],
+//     recipeIds: ["2", "3", "9"], // + Cataplasma de açafrão-da-terra
+//   },
+//   {
+//     id: 3,
+//     starsRequired: 250,
+//     lives: 5,
+//     clientIds: ["1", "3"], // + Amanda
+//     recipeIds: ["2", "3", "4", "8", "9"], // + Chá de jatobá, Chá de casca d'anta
+//   },
+//   {
+//     id: 4,
+//     starsRequired: 300,
+//     lives: 4,
+//     clientIds: ["1", "3"],
+//     recipeIds: ["2", "3", "4", "8", "9", "10"], // + Pó de quina-do-cerrado
+//   },
+//   {
+//     id: 5,
+//     starsRequired: 350,
+//     lives: 4,
+//     clientIds: ["1", "3"],
+//     recipeIds: ["2", "3", "4", "7", "8", "9", "10"], // + Garrafada (sem cliente fixo)
+//   },
+//   {
+//     id: 6,
+//     starsRequired: 450,
+//     lives: 3,
+//     clientIds: ["1", "3", "2"], // + Luiz
+//     recipeIds: ["1", "2", "3", "4", "5", "7", "8", "9", "10"], // + Lambedores de Luiz
+//   },
+//   {
+//     id: 7,
+//     starsRequired: 550,
+//     lives: 3,
+//     clientIds: ["1", "3", "2"],
+//     recipeIds: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], // todas as 10
+//   },
+// ]
+
 export const LEVELS: LevelConfig[] = [
   {
     id: 1,
-    starsRequired: 100,
+    starsRequired: 100, // 2 clientes: Luciana, Luciana
     lives: 5,
-    clientIds: ["1"], // Luciana
-    recipeIds: ["2", "3"], // Chá de Guiné, Chá de Jurubeba
+    clientIds: ["1"],
+    recipeIds: ["2", "3"], // chá de Guiné, chá de Jurubeba
   },
   {
     id: 2,
-    starsRequired: 150,
+    starsRequired: 150, // 3 clientes: Amanda, Luciana, Amanda
     lives: 5,
-    clientIds: ["1"],
-    recipeIds: ["2", "3", "9"], // + Cataplasma de açafrão-da-terra
+    clientIds: ["3", "1"], // Amanda (nova) aparece primeiro
+    recipeIds: [ "7", "8", "9", "10"], // Luciana só tem o cataplasma
   },
   {
     id: 3,
-    starsRequired: 250,
-    lives: 5,
-    clientIds: ["1", "3"], // + Amanda
-    recipeIds: ["2", "3", "4", "8", "9"], // + Chá de jatobá, Chá de casca d'anta
+    starsRequired: 250, // 5 clientes: Luiz, Luciana, Amanda, Luiz, Luciana
+    lives: 4,
+    clientIds: ["2", "1", "3"], // Luiz (novo) aparece primeiro
+    recipeIds: ["4", "5", "6", "7", "8", "9", "10"],
   },
   {
     id: 4,
-    starsRequired: 300,
+    starsRequired: 350, // 7 clientes
     lives: 4,
-    clientIds: ["1", "3"],
-    recipeIds: ["2", "3", "4", "8", "9", "10"], // + Pó de quina-do-cerrado
+    clientIds: ["1", "2", "3"],
+    recipeIds: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
   },
   {
     id: 5,
-    starsRequired: 350,
-    lives: 4,
-    clientIds: ["1", "3"],
-    recipeIds: ["2", "3", "4", "7", "8", "9", "10"], // + Garrafada (sem cliente fixo)
-  },
-  {
-    id: 6,
-    starsRequired: 450,
+    starsRequired: 450, // 9 clientes
     lives: 3,
-    clientIds: ["1", "3", "2"], // + Luiz
-    recipeIds: ["1", "2", "3", "4", "5", "7", "8", "9", "10"], // + Lambedores de Luiz
-  },
-  {
-    id: 7,
-    starsRequired: 550,
-    lives: 3,
-    clientIds: ["1", "3", "2"],
-    recipeIds: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], // todas as 10
+    clientIds: ["3", "1", "2"],
+    recipeIds: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
   },
 ]
