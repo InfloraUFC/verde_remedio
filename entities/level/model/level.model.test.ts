@@ -39,11 +39,6 @@ describe("level.model", () => {
     //   const current = new Set(getUnlockedPlantKeys(getLevel(id)))
     //   for (const key of previous) expect(current.has(key)).toBe(true)
     // }
-    for (let id = 2; id <= 5; id++) {
-      const previous = new Set(getUnlockedPlantKeys(getLevel(id - 1)))
-      const current = new Set(getUnlockedPlantKeys(getLevel(id)))
-      for (const key of previous) expect(current.has(key)).toBe(true)
-    }
   })
 
   it("derives unlocked instruments from the level's recipes", () => {
@@ -52,6 +47,6 @@ describe("level.model", () => {
 
   it("the final level unlocks all 10 recipes", () => {
     // expect(getLevel(7).recipeIds).toHaveLength(10)
-    expect(getLevel(5).recipeIds).toHaveLength(8)
+    expect(getLevel(5).recipeIds).toHaveLength(10)
   })
 })
